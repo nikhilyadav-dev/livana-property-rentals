@@ -1,0 +1,48 @@
+/* basic styling */
+.flex {
+  display: flex;
+  align-items: center !important;
+}
+
+a {
+  text-decoration: none !important;
+  color: #222222 !important;
+}
+a:hover {
+  text-decoration: underline !important;
+  color: #fe424d !important;
+}
+
+.navIcon {
+  color: #fe424d;
+  font-size: 2rem;
+}
+
+nav {
+  height: 5rem;
+  background-color: white;
+}
+
+.nav-link {
+  color: #222222 !important;
+}
+
+/* Footer Styling */
+
+.footer-content {
+  text-align: center;
+  background-color: #f7f7f7;
+  padding-block: 1rem;
+}
+
+.links {
+  justify-content: center;
+}
+
+.brand-info {
+  line-height: 3rem;
+}
+
+.fa-brands {
+  font-size: 1.2rem;
+}
