@@ -1,4 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
 /* basic styling */
+
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+}
 .flex {
   display: flex;
   align-items: center !important;
@@ -12,6 +18,12 @@ a:hover {
   text-decoration: underline !important;
   color: #fe424d !important;
 }
+
+.wrap {
+  flex-wrap: wrap !important;
+}
+
+/* Navbar Styling */
 
 .navIcon {
   color: #fe424d;
@@ -45,4 +57,30 @@ nav {
 
 .fa-brands {
   font-size: 1.2rem;
+}
+
+/* Listing Card Styling */
+
+.card {
+  border: none;
+  margin-bottom: 2rem;
+}
+.card-img-top {
+  height: 20rem;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.card-img-overlay {
+  opacity: 0;
+}
+
+.card-img-overlay:hover {
+  opacity: 0.2;
+  background: #fff;
 }
