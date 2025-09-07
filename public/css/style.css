@@ -4,6 +4,13 @@
 
 body {
   font-family: "Plus Jakarta Sans", sans-serif !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.conatiner {
+  flex: 1 !important;
+  padding-inline: 2rem !important;
 }
 .flex {
   display: flex;
@@ -12,11 +19,7 @@ body {
 
 a {
   text-decoration: none !important;
-  color: #222222 !important;
-}
-a:hover {
-  text-decoration: underline !important;
-  color: #fe424d !important;
+  color: #222222;
 }
 
 .wrap {
@@ -83,4 +86,10 @@ nav {
 .card-img-overlay:hover {
   opacity: 0.2;
   background: #fff;
+}
+
+/* Show Styling */
+.btns {
+  display: flex;
+  gap: 1rem;
 }

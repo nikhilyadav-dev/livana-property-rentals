@@ -53,7 +53,6 @@ app.post("/listings", async (req, res) => {
 
 app.get("/listing/:id", async (req, res) => {
   let { id } = req.params;
-  console.log(id);
   const listing = await Listing.findById(id);
   res.render("listings/show.ejs", { listing });
 });

@@ -8,7 +8,15 @@ let listingSchema = new Schema({
   description: String,
   image: {
     filename: String,
-    url: String,
+    url: {
+      type: String,
+      default:
+        "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      set: (v) =>
+        v === " "
+          ? "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          : v,
+    },
   },
   price: Number,
   location: String,
