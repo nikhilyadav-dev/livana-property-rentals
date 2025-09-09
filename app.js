@@ -6,6 +6,8 @@ const Listing = require("./modles/listing");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync");
+const ExpressError = require("./utils/ExpressError");
 // set view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -32,10 +34,13 @@ app.get("/", (req, res) => {
 
 //Index Path
 
-app.get("/listings", async (req, res) => {
-  const allListings = await Listing.find({});
-  res.render("listings/index", { allListings });
-});
+app.get(
+  "/listings",
+  wrapAsync(async (req, res) => {
+    const allListings = await Listing.find({});
+    res.render("listings/index", { allListings });
+  })
+);
 
 // New Path
 
@@ -43,41 +48,62 @@ app.get("/listings/new", (req, res) => {
   res.render("listings/new.ejs");
 });
 
-app.post("/listings", async (req, res) => {
-  const newListing = new Listing(req.body.listing);
-  await newListing.save();
-  res.redirect("/listings");
-});
+app.post(
+  "/listings",
+  wrapAsync(async (req, res) => {
+    if (!req.body.listing) {
+      throw new ExpressError(404, "send valid data for listing");
+    }
+    const newListing = new Listing(req.body.listing);
+    await newListing.save();
+    res.redirect("/listings");
+  })
+);
 
 // Show Path
 
-app.get("/listing/:id", async (req, res) => {
-  let { id } = req.params;
-  const listing = await Listing.findById(id);
-  res.render("listings/show.ejs", { listing });
-});
+app.get(
+  "/listing/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render("listings/show.ejs", { listing });
+  })
+);
 
 // Edit Path
-app.get("/listing/:id/edit", async (req, res) => {
-  const { id } = req.params;
-  const listing = await Listing.findById(id);
-  res.render("listings/edit.ejs", { listing });
-});
+app.get(
+  "/listing/:id/edit",
+  wrapAsync(async (req, res) => {
+    const { id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render("listings/edit.ejs", { listing });
+  })
+);
 
-app.put("/listings/:id", async (req, res) => {
-  const { id } = req.params;
-  const listing = req.body.listing;
-  await Listing.findByIdAndUpdate(id, listing);
-  res.redirect("/listings");
-});
+app.put(
+  "/listings/:id",
+  wrapAsync(async (req, res) => {
+    if (!req.body.listing) {
+      throw new ExpressError(404, "send valid data for listing");
+    }
+    const { id } = req.params;
+    const listing = req.body.listing;
+    await Listing.findByIdAndUpdate(id, listing);
+    res.redirect("/listings");
+  })
+);
 
 // Delete Path
 
-app.delete("/listings/:id", async (req, res) => {
-  const { id } = req.params;
-  await Listing.findByIdAndDelete(id);
-  res.redirect("/listings");
-});
+app.delete(
+  "/listings/:id",
+  wrapAsync(async (req, res) => {
+    const { id } = req.params;
+    await Listing.findByIdAndDelete(id);
+    res.redirect("/listings");
+  })
+);
 
 //Test Path
 
@@ -100,6 +126,16 @@ app.delete("/listings/:id", async (req, res) => {
 //   console.log("data instered");
 //   res.send("working");
 // });
+
+app.use((req, res, next) => {
+  // throw new ExpressError(404, "Page not found");
+  next(new ExpressError(404, "Page not found"));
+});
+
+app.use((err, req, res, next) => {
+  let { status = 500, message = "something went wrong" } = err;
+  res.status(status).render("error.ejs", { msg: message });
+});
 
 app.listen("8080", () => {
   console.log("server is listening on 8080");
