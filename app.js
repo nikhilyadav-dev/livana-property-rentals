@@ -8,13 +8,20 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
+const { listingJoiSchema } = require("./schema");
+
 // set view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
-app.use(express.static(path.join(__dirname, "/public")));
+// Parse application/x-www-form-urlencoded (from forms)
+app.use(express.urlencoded({ extended: true }));
+// Parse application/json (from Postman, fetch API, etc.)
+app.use(express.json());
+const cors = require("cors");
+app.use(cors());
 
 main()
   .then(() => {
@@ -48,12 +55,28 @@ app.get("/listings/new", (req, res) => {
   res.render("listings/new.ejs");
 });
 
+const validateListing = (req, res, next) => {
+  const { error } = listingJoiSchema.validate(req.body, {
+    abortEarly: false,
+  });
+
+  if (error) {
+    return next(
+      new ExpressError(400, error.details.map((el) => el.message).join(", "))
+    );
+  }
+};
+
 app.post(
   "/listings",
-  wrapAsync(async (req, res) => {
-    if (!req.body.listing) {
-      throw new ExpressError(404, "send valid data for listing");
-    }
+  validateListing,
+  wrapAsync(async (req, res, next) => {
+    //old way
+    // if (!req.body.listing) {
+    //   throw new ExpressError(404, "send valid data for listing");
+    // }
+    //new way
+    // Validate body against Joi schema
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
@@ -83,6 +106,7 @@ app.get(
 
 app.put(
   "/listings/:id",
+  validateListing,
   wrapAsync(async (req, res) => {
     if (!req.body.listing) {
       throw new ExpressError(404, "send valid data for listing");
