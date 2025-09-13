@@ -8,7 +8,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
-const { listingJoiSchema } = require("./schema");
+const { listingJoiSchema, reviewJoiSchema } = require("./schema");
+const Review = require("./modles/review");
 
 // set view engine
 app.set("view engine", "ejs");
@@ -39,6 +40,36 @@ app.get("/", (req, res) => {
   res.send("working");
 });
 
+// Server side validations functions
+
+const validateListing = (req, res, next) => {
+  const { error } = listingJoiSchema.validate(req.body, {
+    abortEarly: false,
+  });
+
+  if (error) {
+    return next(
+      new ExpressError(400, error.details.map((el) => el.message).join(", "))
+    );
+  } else {
+    next();
+  }
+};
+
+const validateReview = (req, res, next) => {
+  const { error } = reviewJoiSchema.validate(req.body, {
+    abortEarly: false,
+  });
+
+  if (error) {
+    return next(
+      new ExpressError(400, error.details.map((el) => el.message).join(", "))
+    );
+  } else {
+    next();
+  }
+};
+
 //Index Path
 
 app.get(
@@ -54,18 +85,6 @@ app.get(
 app.get("/listings/new", (req, res) => {
   res.render("listings/new.ejs");
 });
-
-const validateListing = (req, res, next) => {
-  const { error } = listingJoiSchema.validate(req.body, {
-    abortEarly: false,
-  });
-
-  if (error) {
-    return next(
-      new ExpressError(400, error.details.map((el) => el.message).join(", "))
-    );
-  }
-};
 
 app.post(
   "/listings",
@@ -129,6 +148,37 @@ app.delete(
   })
 );
 
+//Review
+app.post(
+  "/listings/:id/reviews",
+  validateReview,
+  wrapAsync(async (req, res) => {
+    let listing = await Listing.findById(req.params.id);
+    let newReview = new Review(req.body.review);
+    listing.reviews.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+    res.redirect(`/listing/${listing._id}`);
+  })
+);
+
+//Page not found middleware
+app.use((req, res, next) => {
+  // throw new ExpressError(404, "Page not found");
+  next(new ExpressError(404, "Page not found"));
+});
+
+//Error handler middleware
+app.use((err, req, res, next) => {
+  let { status = 500, message = "something went wrong" } = err;
+  res.status(status).render("error.ejs", { msg: message });
+});
+
+app.listen("8080", () => {
+  console.log("server is listening on 8080");
+});
+
 //Test Path
 
 // app.get("/testListing", async (req, res) => {
@@ -150,17 +200,3 @@ app.delete(
 //   console.log("data instered");
 //   res.send("working");
 // });
-
-app.use((req, res, next) => {
-  // throw new ExpressError(404, "Page not found");
-  next(new ExpressError(404, "Page not found"));
-});
-
-app.use((err, req, res, next) => {
-  let { status = 500, message = "something went wrong" } = err;
-  res.status(status).render("error.ejs", { msg: message });
-});
-
-app.listen("8080", () => {
-  console.log("server is listening on 8080");
-});
