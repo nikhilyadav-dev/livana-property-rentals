@@ -21,7 +21,7 @@ let listingSchema = new Schema({
   price: Number,
   location: String,
   country: String,
-  reviews: [{ type: Schema.Types.ObjectId }],
+  reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
 });
 
 let Listing = mongoose.model("Listing", listingSchema);
