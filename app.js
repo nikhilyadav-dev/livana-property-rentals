@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 // Parse application/json (from Postman, fetch API, etc.)
 app.use(express.json());
 const cors = require("cors");
+const review = require("./modles/review");
 app.use(cors());
 
 main()
@@ -149,6 +150,7 @@ app.delete(
 );
 
 //Review
+//index route
 app.post(
   "/listings/:id/reviews",
   validateReview,
@@ -162,6 +164,18 @@ app.post(
     res.redirect(`/listing/${listing._id}`);
   })
 );
+
+// Delete Review Route
+app.delete("/listings/:id/reviews/:reviewId", async (req, res) => {
+  let { id, reviewId } = req.params;
+  await Review.findByIdAndDelete(reviewId);
+
+  const resu = await Listing.findByIdAndUpdate(id, {
+    $pull: { reviews: reviewId },
+  });
+  console.log(resu);
+  res.redirect(`/listing/${id}`);
+});
 
 //Page not found middleware
 app.use((req, res, next) => {
