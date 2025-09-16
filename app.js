@@ -6,6 +6,9 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
+const cors = require("cors");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 const listings = require("./routes/listing");
 const reviews = require("./routes/review");
@@ -20,9 +23,24 @@ app.engine("ejs", ejsMate);
 app.use(express.urlencoded({ extended: true }));
 // Parse application/json (from Postman, fetch API, etc.)
 app.use(express.json());
-const cors = require("cors");
-const review = require("./modles/review");
 app.use(cors());
+const sessionOption = {
+  secret: " mysuperscretesode",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  },
+};
+app.use(session(sessionOption));
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 main()
   .then(() => {
@@ -38,6 +56,10 @@ async function main() {
 
 app.get("/", (req, res) => {
   res.send("working");
+});
+
+app.get("/test", (req, res) => {
+  res.send("Listings router working!");
 });
 
 app.use("/listings", listings);
