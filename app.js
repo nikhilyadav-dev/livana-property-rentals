@@ -9,9 +9,13 @@ const ExpressError = require("./utils/ExpressError");
 const cors = require("cors");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStretgy = require("passport-local");
+const User = require("./modles/user");
 
-const listings = require("./routes/listing");
-const reviews = require("./routes/review");
+const listingsRouter = require("./routes/listing");
+const reviewsRouter = require("./routes/review");
+const usersRouter = require("./routes/user");
 
 // set view engine
 app.set("view engine", "ejs");
@@ -36,11 +40,19 @@ const sessionOption = {
 };
 app.use(session(sessionOption));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
 });
+
+//Passport
+passport.use(new LocalStretgy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 main()
   .then(() => {
@@ -58,12 +70,18 @@ app.get("/", (req, res) => {
   res.send("working");
 });
 
-app.get("/test", (req, res) => {
-  res.send("Listings router working!");
-});
+// app.get("/demouser", (req, res) => {
+//   let fakeUser = new User({
+//     email: "student@gmail.com",
+//     username: "delta-student",
+//   });
+//   let registeredUser = User.register(fakeUser, "helloworld");
+//   res.send(registeredUser);
+// });
 
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", reviews);
+app.use("/listings", listingsRouter);
+app.use("/listings/:id/reviews", reviewsRouter);
+app.use("/", usersRouter);
 
 //Page not found middleware
 app.use((req, res, next) => {
