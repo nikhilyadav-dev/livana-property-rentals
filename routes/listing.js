@@ -5,6 +5,7 @@ const Listing = require("../modles/listing");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { listingJoiSchema, reviewJoiSchema } = require("../schema");
+const { isLoggedIn } = require("../middleware.js");
 
 const validateListing = (req, res, next) => {
   const { error } = listingJoiSchema.validate(req.body, {
@@ -30,13 +31,14 @@ router.get(
 );
 
 // New Path
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("listings/new.ejs");
 });
 
 router.post(
   "/",
   validateListing,
+  isLoggedIn,
   wrapAsync(async (req, res, next) => {
     //old way
     // if (!req.body.listing) {
@@ -68,6 +70,7 @@ router.get(
 // Edit Path
 router.get(
   "/:id/edit",
+  isLoggedIn,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
@@ -82,6 +85,7 @@ router.get(
 router.put(
   "/:id",
   validateListing,
+  isLoggedIn,
   wrapAsync(async (req, res) => {
     if (!req.body.listing) {
       throw new ExpressError(404, "send valid data for listing");
@@ -98,6 +102,7 @@ router.put(
 // Delete Path
 router.delete(
   "/:id",
+  isLoggedIn,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Listing.findByIdAndDelete(id);
