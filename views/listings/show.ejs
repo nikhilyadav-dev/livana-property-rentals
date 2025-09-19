@@ -11,6 +11,7 @@
     />
     <div class="card-body">
       <p class="card-text">
+        Owned by <i><%=listing.owner.username%></i> <br />
         <br />
         <%=listing.description%>
         <br />
@@ -23,6 +24,8 @@
       </p>
     </div>
   </div>
+
+  <% if(currUser && currUser._id.equals(listing.owner._id)) {%>
 
   <div class="row">
     <a href="/listings/<%=listing.id%>/edit" class="btn btn-dark col-1 offset-3"
@@ -37,8 +40,13 @@
       <button class="btn btn-dark">Delete</button>
     </form>
   </div>
+
+  <% }%>
+
   <!-- Review Form -->
+
   <div class="col-8 offset-3 mb-3">
+    <% if(currUser) {%>
     <hr />
     <h4>Leav a Review</h4>
     <form
@@ -73,6 +81,8 @@
       <button class="btn btn-outline-dark mt-3">Submit</button>
     </form>
 
+    <% }%>
+
     <hr />
 
     <!-- Review Loop -->
@@ -81,10 +91,12 @@
       <% for(review of listing.reviews){ %>
       <div class="card col-5 mb-3 ms-3">
         <div class="card-body">
-          <h5 class="card-title">Siddhi</h5>
+          <h5 class="card-title">@<%= review.author.username %></h5>
           <p class="card-text"><%= review.comment %></p>
           <p class="card-text"><%= review.rating %>star</p>
         </div>
+        <% if(currUser && currUser._id.equals(review.author._id)) {%>
+
         <form
           action="/listings/<%=listing.id%>/reviews/<%=review.id%>?_method=Delete"
           method="post"
@@ -92,6 +104,7 @@
         >
           <button class="btn btn-sm btn-dark">Delete</button>
         </form>
+        <% } %>
       </div>
 
       <% } %>
