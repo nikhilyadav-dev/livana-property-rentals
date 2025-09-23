@@ -6,21 +6,41 @@ const { isLoggedIn, isOwner } = require("../middleware.js");
 const { validateListing } = require("../middleware");
 const listingController = require("../controllers/listings.js");
 
+router
+  .route("/")
+  .get(wrapAsync(listingController.index))
+  .post(
+    validateListing,
+    isLoggedIn,
+    wrapAsync(listingController.createListing)
+  );
+
 //Index Path
-router.get("/", wrapAsync(listingController.index));
+// router.get("/", wrapAsync(listingController.index));
 
 // New Path
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 
-router.post(
-  "/",
-  validateListing,
-  isLoggedIn,
-  wrapAsync(listingController.createListing)
-);
+// router.post(
+//   "/",
+//   validateListing,
+//   isLoggedIn,
+//   wrapAsync(listingController.createListing)
+// );
+
+router
+  .route("/:id")
+  .get(wrapAsync(listingController.showListing))
+  .put(
+    isLoggedIn,
+    isOwner,
+    validateListing,
+    wrapAsync(listingController.updateListing)
+  )
+  .delete(isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
 
 // Show Path
-router.get("/:id", wrapAsync(listingController.showListing));
+// router.get("/:id", wrapAsync(listingController.showListing));
 
 // Edit Path
 router.get(
@@ -30,20 +50,20 @@ router.get(
   wrapAsync(listingController.renderEditForm)
 );
 
-router.put(
-  "/:id",
-  isLoggedIn,
-  isOwner,
-  validateListing,
-  wrapAsync(listingController.updateListing)
-);
+// router.put(
+//   "/:id",
+//   isLoggedIn,
+//   isOwner,
+//   validateListing,
+//   wrapAsync(listingController.updateListing)
+// );
 
 // Delete Path
-router.delete(
-  "/:id",
-  isLoggedIn,
-  isOwner,
-  wrapAsync(listingController.destroyListing)
-);
+// router.delete(
+//   "/:id",
+//   isLoggedIn,
+//   isOwner,
+//   wrapAsync(listingController.destroyListing)
+// );
 
 module.exports = router;
