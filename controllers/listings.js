@@ -16,8 +16,15 @@ module.exports.createListing = async (req, res, next) => {
   // }
   //new way
   // Validate body against Joi schema
+
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
+  if (req.file) {
+    const { path, filename } = req.file;
+    newListing.image.filename = filename;
+    newListing.image.url = path;
+  }
+
   await newListing.save();
   req.flash("success", "New Listing Created");
   res.redirect("/listings");
@@ -42,12 +49,23 @@ module.exports.renderEditForm = async (req, res) => {
     req.flash("error", "Listing you requested for doesn't  exist!");
     return res.redirect("/listings");
   }
-  res.render("listings/edit.ejs", { listing });
+  let originalImageUrl = listing.image.url;
+  originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250");
+  res.render("listings/edit.ejs", { listing, originalImageUrl });
 };
 
 module.exports.updateListing = async (req, res) => {
   const { id } = req.params;
   const updatedList = req.body.listing;
+  if (req.file) {
+    const { path, filename } = req.file;
+    if (!updatedList.image) {
+      updatedList.image = {};
+    }
+    updatedList.image.filename = filename;
+    updatedList.image.url = path;
+  }
+  console.log(updatedList);
   await Listing.findByIdAndUpdate(id, updatedList);
   req.flash("success", "Listing Updated");
   res.redirect(`/listings/${id}`);
