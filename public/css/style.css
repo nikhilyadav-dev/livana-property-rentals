@@ -89,3 +89,10 @@ nav {
 }
 
 /* Show Styling */
+
+/* Map styling */
+
+#map {
+  height: 300px;
+  width: 100vh;
+}
