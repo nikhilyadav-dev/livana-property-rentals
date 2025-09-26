@@ -1,9 +1,116 @@
 <% layout("/layouts/boilerPlate.ejs") %>
-
-<h3>All Listings</h3>
+<!-- 
+<h3>All Listings</h3> -->
 <!-- <form method="GET" action="/listings/new">
     <button>Create New Listing</button>
   </form> -->
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.7;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+
+  .filter p {
+    font-size: 0.8rem;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  .text-toggler {
+    border: 1px solid rgb(110, 110, 110);
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    margin-left: 5rem;
+  }
+
+  .hide {
+    display: none;
+  }
+</style>
+
+<div class="filters">
+  <div class="filter">
+    <i class="fa-solid fa-fire"></i>
+    <p>Trending</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-bed"></i>
+    <p>Rooms</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-city"></i>
+    <p>Iconis Cities</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-cable-car"></i>
+    <p>Mountains</p>
+  </div>
+  <div class="filter">
+    <i class="fa-brands fa-fort-awesome-alt"></i>
+    <p>Castals</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-person-swimming"></i>
+    <p>Amezing Pools</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-campground"></i>
+    <p>Camping</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-cow"></i>
+    <p>Farms</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-snowflake"></i>
+    <p>Arctic</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-igloo"></i>
+    <p>Domes</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-sailboat"></i>
+    <p>Boats</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-fire"></i>
+    <p>Trending</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-bed"></i>
+    <p>Rooms</p>
+  </div>
+
+  <div class="text-toggler">
+    <div class="form-check form-switch form-check-reverse">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="switchCheckDefault"
+      />
+      <label class="form-check-label" for="switchCheckDefault"
+        >Display total after taxes</label
+      >
+    </div>
+  </div>
+</div>
 
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
   <%for(let listing of allListings){%>
@@ -18,7 +125,8 @@
       <div class="card-body">
         <p class="card-text">
           <b><%=listing.title%></b> <br />
-          &#8377;<%= listing.price %> / night
+          &#8377;<%= listing.price %> / night &nbsp;
+          <i class="toggledText hide">18+ GST</i>
         </p>
       </div>
     </div>
@@ -31,3 +139,20 @@
     <li><a href="/listing/<%=listing.id%>"><%=listing.title%></a></li>
     <%}%>
   </ul> -->
+
+<script>
+  const toggler = document.getElementById("switchCheckDefault");
+  let clicked = true;
+  toggler.addEventListener("click", () => {
+    const texInfo = document.getElementsByClassName("toggledText");
+
+    for (info of texInfo) {
+      if (clicked == true) {
+        info.classList.remove("hide");
+      } else {
+        info.classList.add("hide");
+      }
+    }
+    clicked = !clicked;
+  });
+</script>

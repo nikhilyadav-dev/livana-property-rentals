@@ -70,9 +70,9 @@ async function main() {
   await mongoose.connect(MONGO_URL);
 }
 
-app.get("/", (req, res) => {
-  res.send("working");
-});
+// app.get("/", (req, res) => {
+//   res.send("working");
+// });
 
 // app.get("/demouser", (req, res) => {
 //   let fakeUser = new User({
