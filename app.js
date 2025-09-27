@@ -70,19 +70,6 @@ async function main() {
   await mongoose.connect(MONGO_URL);
 }
 
-// app.get("/", (req, res) => {
-//   res.send("working");
-// });
-
-// app.get("/demouser", (req, res) => {
-//   let fakeUser = new User({
-//     email: "student@gmail.com",
-//     username: "delta-student",
-//   });
-//   let registeredUser = User.register(fakeUser, "helloworld");
-//   res.send(registeredUser);
-// });
-
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", usersRouter);
