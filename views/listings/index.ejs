@@ -7,36 +7,107 @@
 
 <style>
   .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
     align-items: center;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    position: relative;
   }
-  .filter {
+  .filter-main {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
+    overflow-x: scroll;
     align-items: center;
-    opacity: 0.7;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
+    height: 90px;
+    position: relative;
+    margin: 5px 2px 0px 2px;
   }
 
-  .filter p {
-    font-size: 0.8rem;
+  .filter-main::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter {
+    min-width: max-content;
+    text-align: center;
+    opacity: 0.6;
+    transition: 150ms ease-in-out all;
+    margin: 2rem 1rem 1rem 1rem;
   }
 
   .filter:hover {
-    opacity: 1;
+    opacity: 1 !important;
+    border-bottom: 2.5px solid rgba(66, 63, 63, 0.679) !important;
+    transform: scale(1.05) !important;
+    transition: 150ms ease all;
     cursor: pointer;
   }
 
-  .text-toggler {
-    border: 1px solid rgb(110, 110, 110);
-    border-radius: 1rem;
-    padding: 0.5rem 1rem;
-    margin-left: 5rem;
+  .filter p {
+    font-size: 0.95rem;
+    width: 100%;
   }
+
+  .slideButton {
+    cursor: pointer;
+    position: sticky;
+    background-color: rgb(128, 128, 128);
+    color: rgb(255, 255, 255);
+    height: 1.75rem;
+    width: 1.75rem;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.75rem;
+    padding: 10px;
+    z-index: 100;
+    transition: all 0.2s ease-out;
+  }
+
+  .slideButton:active {
+    transform: scale(1.2);
+    background-color: black;
+  }
+
+  .slideButton > i {
+    font-size: 1rem;
+  }
+
+  .left_img_button {
+    left: 0px;
+  }
+
+  .right_img_button {
+    right: 0px;
+  }
+
+  .text-toggler {
+    border: 0.5px solid rgba(128, 128, 128, 0.503);
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    min-width: max-content;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    font-weight: 500;
+  }
+
+  .text-toggler:hover {
+    border: 1px solid black !important;
+  }
+
+  /* min-width: 300px;
+  width: fit-content !important;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  font-weight: 500; */
 
   .hide {
     display: none;
@@ -44,73 +115,116 @@
 </style>
 
 <div class="filters">
-  <div class="filter">
-    <i class="fa-solid fa-fire"></i>
-    <p>Trending</p>
+  <div class="slideButton left_img_button" style="display: none">
+    <i class="fa-solid fa-angle-left"></i>
   </div>
-  <div class="filter">
-    <i class="fa-solid fa-bed"></i>
-    <p>Rooms</p>
+  <div class="filter-main">
+    <div class="filter">
+      <i class="fa-solid fa-campground"></i>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-cow"></i>
+      <p>Farms</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-snowflake"></i>
+      <p>Arctic</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-igloo"></i>
+      <p>Domes</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-sailboat"></i>
+      <p>Boats</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-fire"></i>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-cable-car"></i>
+      <p>Mountains</p>
+    </div>
+    <div class="filter">
+      <i class="fa-brands fa-fort-awesome-alt"></i>
+      <p>Castals</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-person-swimming"></i>
+      <p>Amezing Pools</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-campground"></i>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-fire"></i>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-city"></i>
+      <p>Iconis Cities</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-cable-car"></i>
+      <p>Mountains</p>
+    </div>
+    <div class="filter">
+      <i class="fa-brands fa-fort-awesome-alt"></i>
+      <p>Castals</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-person-swimming"></i>
+      <p>Amezing Pools</p>
+    </div>
   </div>
-  <div class="filter">
-    <i class="fa-solid fa-city"></i>
-    <p>Iconis Cities</p>
+  <div class="slideButton right_img_button">
+    <i class="fa-solid fa-angle-right"></i>
   </div>
-  <div class="filter">
-    <i class="fa-solid fa-cable-car"></i>
-    <p>Mountains</p>
-  </div>
-  <div class="filter">
-    <i class="fa-brands fa-fort-awesome-alt"></i>
-    <p>Castals</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-person-swimming"></i>
-    <p>Amezing Pools</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-campground"></i>
-    <p>Camping</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-cow"></i>
-    <p>Farms</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-snowflake"></i>
-    <p>Arctic</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-igloo"></i>
-    <p>Domes</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-sailboat"></i>
-    <p>Boats</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-fire"></i>
-    <p>Trending</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-bed"></i>
-    <p>Rooms</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-bed"></i>
-    <p>Rooms</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-bed"></i>
-    <p>Rooms</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-bed"></i>
-    <p>Rooms</p>
-  </div>
-  <div class="filter">
-    <i class="fa-solid fa-bed"></i>
-    <p>Rooms</p>
+
+  <div
+    class="text-toggler tax-filter-icon filterIcon me-2 ms-2"
+    onclick="filterClick()"
+  >
+    <div
+      class="form-check form-switch form-check-reverse pe-1"
+      style="cursor: pointer"
+    >
+      <i class="fa-solid fa-sliders" id="filter-icon"></i>
+      <label class="form-check-label" for="filter-icon" style="cursor: pointer"
+        >Filters</label
+      >
+    </div>
   </div>
 
   <div class="text-toggler">
@@ -170,5 +284,28 @@
       }
     }
     clicked = !clicked;
+  });
+
+  // filters slide button add-----------------------------------
+  let filtersBox = document.querySelector(".filter-main");
+  let buttonSlide = document.querySelectorAll(".slideButton");
+
+  buttonSlide.forEach((button) => {
+    button.addEventListener("click", () => {
+      const direction = button.classList.contains("left_img_button") ? -1 : 1;
+      const scrollImg = direction * (filtersBox.clientWidth - 100);
+      filtersBox.scrollBy({ left: scrollImg, behavior: "smooth" });
+    });
+  });
+
+  filtersBox.addEventListener("scroll", () => {
+    buttonSlide[0].style.display = filtersBox.scrollLeft <= 0 ? "none" : "flex";
+    buttonSlide[1].style.display =
+      filtersBox.scrollLeft >=
+      filtersBox.scrollWidth - filtersBox.clientWidth - 5
+        ? "none"
+        : "flex";
+    console.log(filtersBox.scrollWidth);
+    console.log(filtersBox.scrollWidth - filtersBox.clientWidth);
   });
 </script>

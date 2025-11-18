@@ -10,7 +10,7 @@ body {
 }
 .conatiner {
   flex: 1 !important;
-  padding-inline: 2rem !important;
+  padding-inline: 5.5rem !important;
 }
 .flex {
   display: flex;
