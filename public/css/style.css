@@ -26,8 +26,9 @@ a {
   flex-wrap: wrap !important;
 }
 
-/* Navbar Styling */
-
+/* ...............................
+Navbar Styling
+..................................*/
 .navIcon {
   color: #fe424d;
   font-size: 2rem;
@@ -38,11 +39,9 @@ nav {
   background-color: white;
 }
 
-.nav-link {
-  color: #222222 !important;
-}
-
-/* Footer Styling */
+/* ...............................
+Footer Styling
+..................................*/
 
 .footer-content {
   text-align: center;
@@ -62,7 +61,9 @@ nav {
   font-size: 1.2rem;
 }
 
-/* Listing Card Styling */
+/* ...............................
+Listing Card Styling
+..................................*/
 
 .listing-card {
   border: none;
@@ -88,9 +89,9 @@ nav {
   background: #fff;
 }
 
-/* Show Styling */
-
-/* Map styling */
+/* ...............................
+Map Styling
+..................................*/
 
 #map {
   height: 300px;
