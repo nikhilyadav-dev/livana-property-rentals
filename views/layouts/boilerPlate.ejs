@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Livana</title>
     <link
+      rel="shortcut icon"
+      href="/asset/9515711c20274841758db3d35e593834.jpg"
+      type="image/x-icon"
+    />
+
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
@@ -23,14 +29,20 @@
       href="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.css"
       rel="stylesheet"
     />
+
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.js"></script>
   </head>
   <body>
-    <%- include("../includes/navbar.ejs") %>
-    <div class="conatiner">
-      <%- include("../includes/flash.ejs") %> <%- body %>
+    <div class="pageblur">
+      <%- include("../includes/navbar.ejs") %>
+      <div class="conatiner">
+        <%- include("../includes/flash.ejs") %> <%- body %>
+      </div>
+      <%- include("../includes/footer.ejs") %>
     </div>
-    <%- include("../includes/footer.ejs") %>
+    <div class="showfilter">
+      <div class="filterbtn"><%- include('../includes/filterbtn.ejs') %></div>
+    </div>
     <script src="/js/script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
