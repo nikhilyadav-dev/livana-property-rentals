@@ -1,18 +1,48 @@
 <%- layout("/layouts/boilerPlate.ejs") %>
+<link rel="stylesheet" href="/css/login.css" />
 
-<div class="row">
-  <div class="col-6 offset-3">
-    <h1>Login</h1>
-    <form action="/login" , method="post" class="needs-validation" novalidate>
-      <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" name="username" class="form-control" required />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" required />
-      </div>
-      <button class="btn btn-success">Login</button>
-    </form>
+<div class="login">
+  <form action="/login" , method="post" class="needs-validation" novalidate>
+    <h1 class="logintitle">Login</h1>
+    <div class="login-inpt">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" name="username" class="form-control" required />
+    </div>
+    <div class="login-inpt">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" required />
+    </div>
+    <button class="login-btn btn-success">
+      Login <i class="fa-solid fa-arrow-right-to-bracket"></i>
+    </button>
+  </form>
+  <div class="oAuth-setup">
+    <p class="">
+      &boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&nbsp;<b>or</b>&nbsp;&boxh;&boxh;&boxh;&boxh;&boxh;&boxh;&nbsp;
+    </p>
+
+    <div class="auth-section">
+      <a href="">
+        <button class="btn btn-google btn-lg" style="width: 90%">
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            style="width: 24px"
+          />
+          <span> Sign in with Google </span>
+        </button>
+      </a>
+      <a href="">
+        <button class="btn btn-google btn-lg" style="width: 90%">
+          <img
+            src="https://1.bp.blogspot.com/-S8HTBQqmfcs/XN0ACIRD9PI/AAAAAAAAAlo/FLhccuLdMfIFLhocRjWqsr9cVGdTN_8sgCPcBGAYYCw/s1600/f_logo_RGB-Blue_1024.png"
+            style="width: 24px"
+          />
+          <span> Sign in with Facebook </span>
+        </button>
+      </a>
+    </div>
+    <h4 class="mt-2 mb-3 bottom-text">
+      Don't have an account ? <b><a href="/signup"> &nbsp;&nbsp;Sign Up</a></b>
+    </h4>
   </div>
 </div>
