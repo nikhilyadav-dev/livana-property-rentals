@@ -2,7 +2,7 @@
   padding: 0 !important;
 }
 
-.login {
+.signup {
   width: 100%;
   height: calc(75vh);
   display: flex;
@@ -11,10 +11,10 @@
   flex-direction: column;
   background-color: white;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 3rem;
 }
 
-.login form {
+.signup form {
   width: 45%;
   /* height: 100%; */
   display: flex;
@@ -24,7 +24,7 @@
   gap: 10px;
 }
 
-.logintitle {
+.signuptitle {
   font-size: 30px;
   font-weight: 300;
   color: black;
@@ -32,7 +32,7 @@
   text-align: start;
 }
 
-.login-inpt {
+.signup-input {
   width: 100%;
   display: flex;
   align-items: start;
@@ -40,13 +40,12 @@
   flex-direction: column;
 }
 
-.login-inpt label {
+.signup-input label {
   font-size: 20px;
   font-weight: 300;
   color: black;
 }
-
-.login-inpt input {
+.signup-input input {
   width: 90%;
   padding: 3px;
   box-sizing: border-box;
@@ -63,7 +62,7 @@
   border: 1px solid rgb(71, 71, 70) !important;
 }
 
-.login-btn {
+.signup-btn {
   padding: 10px 40px 10px 40px;
   background-color: rgb(247, 8, 8);
   color: white;
@@ -122,7 +121,7 @@
 }
 
 @media (max-width: 650px) {
-  .login form {
+  .signup form {
     width: 60%;
   }
 
@@ -132,7 +131,7 @@
 }
 
 @media (max-width: 500px) {
-  .login form {
+  .signup form {
     width: 70%;
   }
 
@@ -142,7 +141,7 @@
 }
 
 @media (max-width: 300px) {
-  .login form {
+  .signup form {
     width: 75%;
   }
 
