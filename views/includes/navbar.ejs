@@ -1,8 +1,16 @@
 <link rel="stylesheet" href="/css/navbar.css" />
 
 <header class="header sticky-top">
+  <div class="hamburger-list">
+    <div class="ham-item"><a class="nav-link" href="/login">Login</a></div>
+    <div class="ham-item"><a class="nav-link" href="/signup">Sign up</a></div>
+    <div class="ham-item"><a class="nav-link" href="/listings">Explore</a></div>
+    <div class="ham-item">
+      <a class="nav-link" href="/listings">Help center</a>
+    </div>
+  </div>
   <div class="nav-container">
-    <a href="#" class="logo">
+    <a href="/listings" class="logo">
       <img
         src="/asset/9515711c20274841758db3d35e593834.jpg"
         alt=""
@@ -19,7 +27,9 @@
     </div>
 
     <div class="ham">
-      <button class="btn1">List Your Home</button>
+      <button class="btn1">
+        <a class="nav-link" href="/listings/new">List Your Home</a>
+      </button>
       <button class="btn2">
         <i class="fa-solid fa-bars hamIcon"></i>
         <i class="fa-regular fa-circle-user userIcon"></i>
@@ -28,22 +38,7 @@
   </div>
 </header>
 
-<script>
-  const navToggler = document.querySelector("[data-nav-toggler]");
-  const navbar = document.querySelector(".navbar");
-  const header = document.querySelector(".header");
-  const favBtns = document.querySelectorAll(".fav-btn");
-  console.log(favBtns);
-
-  navToggler.addEventListener("click", () => {
-    navToggler.classList.toggle("active");
-    navbar.classList.toggle("active");
-  });
-
-  window.addEventListener("scroll", (e) => {
-    header.classList[window.scrollY > 50 ? "add" : "remove"]("active");
-  });
-</script>
+<script src="/js/navbar.js"></script>
 
 <!-- <nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top"></nav> -->
 <!-- <div class="container-fluid">
@@ -75,32 +70,3 @@
       </div>
     </div>
   </div> -->
-
-<!-- <header class="header sticky-top">
-  <div class="container">
-    <a href="#">
-      <i class="fa-solid fa-bed navIcon"></i>
-    </a>
-    <nav class="navbar flex">
-      <ul class="navbar-list flex">
-        <li><a href="#" class="nav-link label-medium active">Home</a></li>
-        <li><a href="#" class="nav-link label-medium">Rent</a></li>
-        <li><a href="#" class="nav-link label-medium">Sell</a></li>
-        <li><a href="#" class="nav-link label-medium">Buy</a></li>
-        <li><a href="#" class="nav-link label-medium">About</a></li>
-      </ul>
-      <div class="nav-btns flex">
-        <a href="#" class="btn-link label-medium">Login</a>
-        <a href="#" class="btn btn-fill label-medium">Get Started</a>
-      </div>
-    </nav>
-    <button
-      class="nav-toggler nav-icon flex"
-      aria-label="toggle navbar"
-      data-nav-toggler
-    >
-      <i class="fa-solid fa-bars material-symbols-rounded open"></i>
-      <i class="fa-solid fa-xmark material-symbols-rounded close"></i>
-    </button>
-  </div>
-</header> -->
