@@ -20,6 +20,7 @@ const listingsRouter = require("./routes/listing");
 const reviewsRouter = require("./routes/review");
 const usersRouter = require("./routes/user");
 const googleRouter = require("./routes/googleAuth");
+const facebookRouter = require("./routes/facebookAuth");
 
 // set view engine
 app.set("view engine", "ejs");
@@ -75,6 +76,7 @@ app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", usersRouter);
 app.use("/auth/google", googleRouter);
+app.use("/auth/facebook", facebookRouter);
 
 //Page not found middleware
 app.use((req, res, next) => {
