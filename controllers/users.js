@@ -54,3 +54,8 @@ module.exports.logout = (req, res, next) => {
     res.redirect("/listings");
   });
 };
+
+//help form
+module.exports.renderContactForm = (req, res) => {
+  res.render("users/contact.ejs");
+};

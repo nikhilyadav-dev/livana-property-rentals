@@ -2,7 +2,7 @@
   padding: 0 !important;
 }
 
-.signup {
+.contact {
   width: 100%;
   height: calc(75vh);
   display: flex;
@@ -14,7 +14,7 @@
   margin-top: 3rem;
 }
 
-.signup form {
+.contact form {
   width: 45%;
   /* height: 100%; */
   display: flex;
@@ -24,7 +24,7 @@
   gap: 10px;
 }
 
-.signuptitle {
+.contacttitle {
   font-size: 30px;
   font-weight: 300;
   color: black;
@@ -32,7 +32,7 @@
   text-align: start;
 }
 
-.signup-input {
+.contact-input {
   width: 100%;
   display: flex;
   align-items: start;
@@ -40,15 +40,15 @@
   flex-direction: column;
 }
 
-.signup-input label {
+.contact-input label {
   font-size: 20px;
   font-weight: 300;
   color: black;
 }
-.signup-input input {
-  width: 90%;
+.contact-input input {
+  width: 100%;
   padding: 7px;
-  padding-left: 10px;
+  padding-left: 10px !important;
   box-sizing: border-box;
   outline: none;
   font-size: 15px;
@@ -57,7 +57,7 @@
   border: 1px solid rgb(71, 71, 70);
 }
 
-.signup-input input::placeholder {
+.contact-input input::placeholder {
   opacity: 0.5;
 }
 
@@ -67,7 +67,7 @@
   border: 1px solid rgb(71, 71, 70) !important;
 }
 
-.signup-btn {
+.contact-btn {
   padding: 10px 40px 10px 40px;
   background-color: rgb(247, 8, 8);
   color: white;
@@ -79,78 +79,33 @@
   gap: 5px;
   border: none;
   margin-top: 12px;
+  width: 30%;
+}
+
+.two-inputs {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+}
+
+.input1,
+.input2 {
   width: 90%;
 }
 
-.oAuth-setup {
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-  align-items: center;
-  width: 45%;
-  gap: 0.5rem;
-}
-
-.auth-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-}
-.btn-google {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  color: #545454;
-  background-color: #ffffff;
-  box-shadow: 0 1px 2px 1px #ddd;
-}
-
-.btn-google span {
-  font-size: 1rem;
-}
-.btn-google:hover {
-  background-color: #f1f1f1;
-}
-
-.bottom-text {
-  color: #545454;
-  font-size: 0.8rem;
-  opacity: 0.8;
-}
-
-.bottom-text b a {
-  color: rgb(247, 8, 8);
-  font-size: 1rem;
-}
-
-@media (max-width: 650px) {
-  .signup form {
-    width: 60%;
-  }
-
-  .oAuth-setup {
-    width: 60%;
-  }
+.input2::placeholder {
+  color: rgb(65, 65, 65);
+  opacity: 0 !important;
 }
 
 @media (max-width: 500px) {
-  .signup form {
-    width: 70%;
-  }
-
-  .oAuth-setup {
+  .contact form {
     width: 70%;
   }
 }
 
 @media (max-width: 300px) {
-  .signup form {
-    width: 75%;
-  }
-
-  .oAuth-setup {
+  .contact form {
     width: 75%;
   }
 }

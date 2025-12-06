@@ -1,0 +1,56 @@
+<%- layout("/layouts/boilerPlate.ejs") %>
+<link rel="stylesheet" href="/css/contact.css" />
+
+<div class="contact">
+  <form action="/signup" , method="post" class="needs-validation" novalidate>
+    <h1 class="contacttitle">Contact Us</h1>
+    <div class="two-inputs">
+      <div class="contact-input input1">
+        <label for="username" class="form-label">Full Name</label>
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          placeholder="Please enter your full name"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="contact-input input2">
+        <label for="username" class="form-label">Email</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          placeholder="user@gmail.com"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+    </div>
+
+    <div class="contact-input">
+      <label for="subject" class="form-label">Subject</label>
+      <input
+        type="text"
+        name="subject"
+        class="form-control"
+        placeholder="e.g., Feedback on Website"
+        required
+      />
+    </div>
+    <div class="contact-input">
+      <label for="password" class="form-label">Message</label>
+      <textarea
+        name="message"
+        class="form-control"
+        rows="5"
+        placeholder="Write your message here…"
+        required
+      ></textarea>
+    </div>
+    <button class="btn-success contact-btn">
+      Send<i class="fa-solid fa-paper-plane"></i>
+    </button>
+  </form>
+</div>

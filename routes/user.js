@@ -25,4 +25,6 @@ router
 
 router.get("/logout", userController.logout);
 
+router.get("/contact", userController.renderContactForm);
+
 module.exports = router;
