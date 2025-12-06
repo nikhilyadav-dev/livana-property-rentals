@@ -1,4 +1,6 @@
 const User = require("../modles/user");
+const generateEmailTemplate = require("../utils/generateEmailTempltae");
+const sendEmail = require("../utils/sendEmail");
 //signup form
 module.exports.renderSignupForm = (req, res) => {
   res.render("users/signup.ejs");
@@ -38,7 +40,6 @@ module.exports.renderLoginForm = (req, res) => {
 
 module.exports.login = async (req, res) => {
   req.flash("success", "Welcome back to Livana");
-  console.log(res.locals.redirectUrl);
   const redirectUrl = res.locals.redirectUrl || "/listings";
   res.redirect(redirectUrl);
 };
@@ -58,4 +59,14 @@ module.exports.logout = (req, res, next) => {
 //help form
 module.exports.renderContactForm = (req, res) => {
   res.render("users/contact.ejs");
+};
+
+module.exports.contactHandle = async (req, res) => {
+  const { fullname, email, subject, message } = req.body;
+  const emailMessage = generateEmailTemplate(fullname, email, message);
+  console.log("route before email sent");
+  sendEmail({ email, subject, emailMessage });
+  console.log("route after email sent");
+  req.flash("success", "Message sent successfully");
+  res.redirect("/contact");
 };

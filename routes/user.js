@@ -25,6 +25,9 @@ router
 
 router.get("/logout", userController.logout);
 
-router.get("/contact", userController.renderContactForm);
+router
+  .route("/contact")
+  .get(userController.renderContactForm)
+  .post(wrapAsync(userController.contactHandle));
 
 module.exports = router;
