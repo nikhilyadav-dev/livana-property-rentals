@@ -7,6 +7,8 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  providerId: String,
+  provider: String,
 });
 
 userSchema.plugin(passportLocalMongoose);

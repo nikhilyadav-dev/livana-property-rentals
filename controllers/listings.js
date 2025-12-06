@@ -20,24 +20,25 @@ module.exports.createListing = async (req, res, next) => {
   //new way
   // Validate body against Joi schema
 
-  const response = await geocodingClient
-    .forwardGeocode({
-      query: req.body.listing.location,
-      limit: 1,
-    })
-    .send();
+  // const response = await geocodingClient
+  //   .forwardGeocode({
+  //     query: req.body.listing.location,
+  //     limit: 1,
+  //   })
+  //   .send();
 
   const newListing = new Listing(req.body.listing);
+
   newListing.owner = req.user._id;
   if (req.file) {
     const { path, filename } = req.file;
     newListing.image.filename = filename;
     newListing.image.url = path;
   }
-  newListing.geometry = response.body.features[0].geometry;
+  // newListing.geometry = response.body.features[0].geometry;
 
   const ress = await newListing.save();
-  console.log(ress);
+
   req.flash("success", "New Listing Created");
   res.redirect("/listings");
 };
