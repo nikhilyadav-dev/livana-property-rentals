@@ -1,9 +1,4 @@
 <% layout("/layouts/boilerPlate.ejs") %>
-<!-- 
-<h3>All Listings</h3> -->
-<!-- <form method="GET" action="/listings/new">
-    <button>Create New Listing</button>
-  </form> -->
 
 <style>
   .filters {
@@ -18,6 +13,7 @@
     flex-direction: row;
     width: 100%;
     overflow-x: scroll;
+    overflow-y: hidden;
     align-items: center;
     height: 90px;
     position: relative;
@@ -120,17 +116,54 @@
   </div>
   <div class="filter-main">
     <div class="filter">
-      <i class="fa-solid fa-campground"></i>
-      <p>Camping</p>
+      <i class="fa-solid fa-fire"></i>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-umbrella-beach"></i>
+      <p>Beachfront</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-city"></i>
+      <p>Iconis Cities</p>
     </div>
     <div class="filter">
       <i class="fa-solid fa-cow"></i>
       <p>Farms</p>
     </div>
     <div class="filter">
+      <i class="fa-solid fa-person-swimming"></i>
+      <p>Amezing Pools</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-anchor"></i>
+      <p>Islands</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-water"></i>
+      <p>Lakefront</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-person-skiing"></i>
+      <p>Sli-in/out</p>
+    </div>
+    <div class="filter">
+      <i class="fa-brands fa-fort-awesome-alt"></i>
+      <p>Castals</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-campground"></i>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
       <i class="fa-solid fa-snowflake"></i>
       <p>Arctic</p>
     </div>
+    <div class="filter">
+      <i class="fa-solid fa-crown"></i>
+      <p>Luxry</p>
+    </div>
+
     <div class="filter">
       <i class="fa-solid fa-igloo"></i>
       <p>Domes</p>
@@ -139,73 +172,10 @@
       <i class="fa-solid fa-sailboat"></i>
       <p>Boats</p>
     </div>
-    <div class="filter">
-      <i class="fa-solid fa-bed"></i>
-      <p>Rooms</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-fire"></i>
-      <p>Trending</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-bed"></i>
-      <p>Rooms</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-bed"></i>
-      <p>Rooms</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-bed"></i>
-      <p>Rooms</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-bed"></i>
-      <p>Rooms</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-bed"></i>
-      <p>Rooms</p>
-    </div>
+
     <div class="filter">
       <i class="fa-solid fa-cable-car"></i>
       <p>Mountains</p>
-    </div>
-    <div class="filter">
-      <i class="fa-brands fa-fort-awesome-alt"></i>
-      <p>Castals</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-person-swimming"></i>
-      <p>Amezing Pools</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-campground"></i>
-      <p>Camping</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-fire"></i>
-      <p>Trending</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-bed"></i>
-      <p>Rooms</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-city"></i>
-      <p>Iconis Cities</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-cable-car"></i>
-      <p>Mountains</p>
-    </div>
-    <div class="filter">
-      <i class="fa-brands fa-fort-awesome-alt"></i>
-      <p>Castals</p>
-    </div>
-    <div class="filter">
-      <i class="fa-solid fa-person-swimming"></i>
-      <p>Amezing Pools</p>
     </div>
   </div>
   <div class="slideButton right_img_button">
