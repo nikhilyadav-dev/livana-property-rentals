@@ -10,28 +10,15 @@ const multer = require("multer");
 const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
 
-router
-  .route("/")
-  .get(wrapAsync(listingController.index))
-  .post(
-    validateListing,
-    isLoggedIn,
-    upload.single("listing[image]"),
-    wrapAsync(listingController.createListing)
-  );
+router.route("/").get(wrapAsync(listingController.index)).post(
+  validateListing,
+  isLoggedIn,
 
-//Index Path
-// router.get("/", wrapAsync(listingController.index));
+  upload.array("listing[images][]", 4),
+  wrapAsync(listingController.createListing)
+);
 
-// New Path
-router.get("/new", isLoggedIn, listingController.renderNewForm);
-
-// router.post(
-//   "/",
-//   validateListing,
-//   isLoggedIn,
-//   wrapAsync(listingController.createListing)
-// );
+router.get("/new", listingController.renderNewForm);
 
 router
   .route("/:id")
@@ -46,9 +33,6 @@ router
 
   .delete(isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
 
-// Show Path
-// router.get("/:id", wrapAsync(listingController.showListing));
-
 // Edit Path
 router.get(
   "/:id/edit",
@@ -56,21 +40,5 @@ router.get(
   isOwner,
   wrapAsync(listingController.renderEditForm)
 );
-
-// router.put(
-//   "/:id",
-//   isLoggedIn,
-//   isOwner,
-//   validateListing,
-//   wrapAsync(listingController.updateListing)
-// );
-
-// Delete Path
-// router.delete(
-//   "/:id",
-//   isLoggedIn,
-//   isOwner,
-//   wrapAsync(listingController.destroyListing)
-// );
 
 module.exports = router;

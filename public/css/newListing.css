@@ -1,0 +1,185 @@
+.conatiner {
+  padding: 0 !important;
+}
+
+.new-list {
+  width: 100%;
+  /* height: calc(75vh); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  gap: 1rem;
+  margin-top: 0rem;
+}
+
+.new-list form {
+  width: 70%;
+  /* height: 100%; */
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.listTitle {
+  font-size: 30px;
+  font-weight: 300;
+  color: black;
+  margin-bottom: 8px;
+  text-align: start;
+}
+
+.list-input {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.list-input label {
+  font-size: 20px;
+  font-weight: 300;
+  color: black;
+}
+
+.hw-1 {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+}
+
+.hw-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.hw-2 .area input {
+  width: 100% !important;
+}
+
+.hw-2 .address input {
+  width: 100% !important;
+}
+.hw-2 .address {
+  width: 80%;
+}
+
+.hw-2 .area {
+  width: 30%;
+}
+
+.select select {
+  width: 50%;
+  padding: 7px;
+}
+
+.bed-bath-gar {
+  display: flex;
+  gap: 15px;
+}
+
+.amenities {
+  display: block !important;
+}
+
+.amenities-input {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 46%;
+  min-width: 175px;
+  margin: 10px;
+}
+
+.signup-input input {
+  width: 90%;
+  padding: 7px;
+  padding-left: 10px;
+  box-sizing: border-box;
+  outline: none;
+  font-size: 15px;
+  font-weight: 300;
+  color: black;
+  border: 1px solid rgb(71, 71, 70);
+}
+
+.input-input input::placeholder {
+  opacity: 0.5;
+}
+
+.form-control {
+  box-shadow: none !important;
+  outline: none !important;
+  border: 1px solid rgb(71, 71, 70) !important;
+}
+
+.input-btn {
+  padding: 10px 40px 10px 40px;
+  background-color: rgb(247, 8, 8);
+  color: white;
+  font-size: 18px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: none;
+  margin-top: 12px;
+  width: max-content;
+}
+
+.price {
+  width: 35%;
+  height: 56px;
+}
+
+.price-container {
+  flex-direction: row !important;
+  justify-content: start;
+  align-items: center;
+  gap: 13px;
+}
+
+@media (max-width: 700px) {
+  .new-list form {
+    width: 80% !important;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 550px) {
+  .hw-1 {
+    flex-wrap: wrap;
+  }
+
+  .hw-2 {
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+
+  .hw-2 .address {
+    width: 100%;
+  }
+
+  .hw-2 .area {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .bed-bath-gar {
+    flex-wrap: wrap;
+  }
+
+  .input-btn {
+    font-size: 13px;
+  }
+}

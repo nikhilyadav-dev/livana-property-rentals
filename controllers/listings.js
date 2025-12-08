@@ -3,20 +3,24 @@ const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapToken = process.env.MAP_KEY;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
+const amenitiesList = {
+  Pool: false,
+  Parking: false,
+  Wifi: false,
+  Gym: false,
+  Garden: false,
+};
+
 module.exports.index = async (req, res) => {
   const allListings = await Listing.find({});
   res.render("listings/index", { allListings });
 };
 
 module.exports.renderNewForm = (req, res) => {
-  res.render("listings/new.ejs");
+  res.render("listings/new.ejs", { amenitiesList });
 };
 
 module.exports.createListing = async (req, res, next) => {
-  //old way
-  // if (!req.body.listing) {
-  //   throw new ExpressError(404, "send valid data for listing");
-  // }
   //new way
   // Validate body against Joi schema
 
@@ -30,14 +34,18 @@ module.exports.createListing = async (req, res, next) => {
   const newListing = new Listing(req.body.listing);
 
   newListing.owner = req.user._id;
-  if (req.file) {
-    const { path, filename } = req.file;
-    newListing.image.filename = filename;
-    newListing.image.url = path;
+  if (req.files) {
+    const imageData = req.files.map((file) => ({
+      url: file.path,
+      filename: file.filename,
+    }));
+
+    newListing.image = imageData;
   }
   // newListing.geometry = response.body.features[0].geometry;
 
   const ress = await newListing.save();
+  console.log("newListing", ress);
 
   req.flash("success", "New Listing Created");
   res.redirect("/listings");

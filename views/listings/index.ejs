@@ -34,7 +34,8 @@
 
   .filter:hover {
     opacity: 1 !important;
-    border-bottom: 2.5px solid rgba(66, 63, 63, 0.679) !important;
+    color: rgba(247, 8, 8, 0.679);
+    border-bottom: 2px solid rgba(247, 8, 8, 0.5) !important;
     transform: scale(1.05) !important;
     transition: 150ms ease all;
     cursor: pointer;
@@ -64,7 +65,7 @@
 
   .slideButton:active {
     transform: scale(1.2);
-    background-color: black;
+    background-color: rgb(247, 8, 8);
   }
 
   .slideButton > i {
@@ -217,7 +218,7 @@
   <a href="/listings/<%= listing.id %>">
     <div class="card col listing-card">
       <img
-        src="<%=listing.image.url%>"
+        src="<%=listing.image[0].url%>"
         class="card-img-top"
         alt="listing_img"
       />

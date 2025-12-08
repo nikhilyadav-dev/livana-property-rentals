@@ -1,86 +1,250 @@
 <%- layout("/layouts/boilerPlate.ejs") %> <br /><br />
-<div class="row">
-  <div class="col-8 offset-2">
-    <h3>Create New Listing</h3>
-    <form
-      method="POST"
-      action="/listings"
-      novalidate
-      class="needs-validation"
-      enctype="multipart/form-data"
-    >
-      <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
+<link rel="stylesheet" href="/css/newListing.css" />
+
+<div class="new-list">
+  <form method="POST" action="/listings" enctype="multipart/form-data">
+    <h1 class="listTitle">List Your Home</h1>
+    <div class="list-input">
+      <label for="propertyname" class="form-label">Property Name</label>
+      <input
+        id="propertyname"
+        type="text"
+        name="listing[title]"
+        class="form-control"
+        placeholder="e.g., Sea View Villa"
+        required
+      />
+    </div>
+    <div class="list-input">
+      <label for="description" class="form-label">Property Description</label>
+      <textarea
+        id="description"
+        name="listing[description]"
+        class="form-control"
+        placeholder="Describe your property in detail"
+        rows="5"
+        required
+      ></textarea>
+    </div>
+
+    <div class="hw-1">
+      <div class="list-input">
+        <label for="city" class="form-label">City</label>
         <input
+          id="city"
           type="text"
-          name="listing[title]"
-          placeholder="Add catchy title"
+          name="listing[city]"
           class="form-control"
+          placeholder="e.g. Raipur"
           required
         />
-        <div class="valid-feedback">Tittle looks good!</div>
       </div>
-
-      <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea
-          name="listing[description]"
-          class="form-control"
-          required
-        ></textarea>
-        <div class="invalid-feedback">Please enter a short description</div>
-      </div>
-
-      <div class="mb-3">
-        <label for="image" class="form-label">Image</label>
+      <div class="list-input">
+        <label for="state" class="form-label">State</label>
         <input
-          type="file"
-          placeholder="enter img URL/Link"
-          name="listing[image]"
+          id="state"
+          type="text"
+          name="listing[state]"
           class="form-control"
+          placeholder="e.g. Chhattisgarh"
+          required
         />
       </div>
-
-      <div class="row">
-        <div class="mb-3 col-md-4">
-          <label for="price" class="form-label">Price</label>
-          <input
-            type="text"
-            placeholder="1200"
-            name="listing[price]"
-            class="form-control"
-            required
-          />
-          <div class="invalid-feedback">Price should be valid</div>
-        </div>
-
-        <div class="mb-3 col-md-8">
-          <label for="location" class="form-label">Location</label>
-          <input
-            type="text"
-            name="listing[location]"
-            placeholder="Raipur, Bilaspur"
-            class="form-control"
-            required
-          />
-          <div class="invalid-feedback">Location should be valid</div>
-        </div>
-      </div>
-
-      <div class="mb-3">
+      <div class="list-input">
         <label for="country" class="form-label">Country</label>
         <input
+          id="country"
           type="text"
           name="listing[country]"
-          placeholder="India"
           class="form-control"
+          placeholder="e.g. India"
           required
         />
-        <div class="invalid-feedback">Country should be valid</div>
+      </div>
+    </div>
+
+    <div class="hw-2">
+      <div class="list-input address">
+        <label for="address" class="form-label">Address</label>
+        <input
+          id="address"
+          type="text"
+          name="listing[location]"
+          class="form-control address"
+          placeholder="street, landmark "
+          required
+        />
+      </div>
+      <div class="list-input area">
+        <label for="area" class="form-label">Area</label>
+        <input
+          id="area"
+          type="number"
+          name="listing[area]"
+          class="form-control area"
+          placeholder="e.g., 1200"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="list-input select">
+      <label for="category" class="form-label">Property Category</label>
+      <select name="listing[category]" id="category" required>
+        <option value="trending">Select Option</option>
+        <option value="trending">Trending</option>
+        <option value="beachfront">Beachfront</option>
+        <option value="iconiscities">Iconis Cities</option>
+        <option value="farms">Farms</option>
+        <option value="amezingpools">Amezing Pools</option>
+        <option value="islands">Islands</option>
+        <option value="sliinout">Sli-in/out</option>
+        <option value="castals">Castals</option>
+        <option value="camping">Camping</option>
+        <option value="arctic">Arctic</option>
+        <option value="luxry">Luxry</option>
+        <option value="domes">Domes</option>
+        <option value="boats">Boats</option>
+        <option value="mountains">Mountains</option>
+      </select>
+    </div>
+
+    <div class="bed-bath-gar">
+      <div class="list-input">
+        <label for="beds" class="form-label">Bedrooms</label>
+        <input
+          id="beds"
+          type="number"
+          name="listing[bedrooms]"
+          class="form-control"
+          placeholder="1"
+          required
+        />
       </div>
 
-      <button class="btn btn-dark">ADD</button>
-    </form>
-  </div>
+      <div class="list-input">
+        <label for="garages" class="form-label">Garages</label>
+        <input
+          id="garages"
+          type="number"
+          name="listing[garages]"
+          class="form-control"
+          placeholder="1"
+          required
+        />
+      </div>
+
+      <div class="list-input">
+        <label for="bathrooms" class="form-label">Bathrooms</label>
+        <input
+          id="bathrooms"
+          type="number"
+          name="listing[bathrooms]"
+          class="form-control"
+          placeholder="1"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="amenities list-input">
+      <label class="form-label">Aminities</label>
+
+      <% Object.keys(amenitiesList).forEach((amenity, index) => { %>
+
+      <div class="amenities-input">
+        <input
+          type="checkbox"
+          name="listing[aminities]"
+          value="<%= amenity %>"
+          id="amenity<%= index %>"
+        />
+        <label for="amenity<%= index %>"><%= amenity %></label>
+      </div>
+      <% }) %>
+    </div>
+
+    <div class="image-container list-input">
+      <label>Upload Images</label>
+      <div
+        class="images-wrapper"
+        style="
+          display: flex;
+          gap: 12px;
+          margin-top: 10px;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+        "
+      >
+        <% for (let i = 1; i <= 4; i++) { %>
+        <label
+          for="image<%= i %>"
+          class="image-box"
+          style="
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+          "
+        >
+          <input
+            type="file"
+            id="image<%= i %>"
+            name="listing[images][]"
+            accept="image/*"
+            onchange="previewImage(event, <%= i %>)"
+            hidden
+            required
+          />
+
+          <div
+            style="
+              height: 70px;
+              width: 120px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: #f3f3f3;
+            "
+          >
+            <img
+              id="preview<%= i %>"
+              src="https://i.pinimg.com/1200x/bb/94/f1/bb94f1b59a4bb4e7b1304ffb2cdc5e17.jpg"
+              style="width: 100%; object-fit: contain"
+            />
+          </div>
+        </label>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="list-input price-container">
+      <label for="price" class="form-label">Price</label>
+      <input
+        id="price"
+        type="text"
+        name="listing[price]"
+        class="form-control price"
+        placeholder="₹12000"
+        required
+      />
+    </div>
+
+    <button class="btn-success input-btn">
+      <span> Add Poperty</span>
+      <i class="fa-solid fa-user-plus"></i>
+    </button>
+  </form>
 </div>
-<br /><br />
+
+<br />
+
+<script>
+  function previewImage(event, index) {
+    const preview = document.getElementById(`preview${index}`);
+    preview.src = URL.createObjectURL(event.target.files[0]);
+  }
+</script>
+
+<!-- class="needs-validation"
+      novalidate -->
