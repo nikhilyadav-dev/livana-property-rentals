@@ -119,7 +119,51 @@ module.exports.categoryFilter = async (req, res) => {
 //Serach Path
 
 module.exports.searchResult = async (req, res) => {
-  console.log("working");
   const { q } = req.query;
-  console.log(q);
+
+  let searchKey = q.trim().replace(/\s+/g, " ");
+
+  if (searchKey == "" || searchKey == " ") {
+    req.flash("error", "Please enter something to search.");
+    res.redirect("/listings");
+  }
+
+  const toTitleCase = (str) => {
+    return str
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
+  searchKey = toTitleCase(searchKey);
+
+  let allListings = [];
+
+  const intValue = parseInt(searchKey, 10);
+  const isIntValue = Number.isInteger(intValue);
+
+  if (isIntValue && allListings.length == 0) {
+    allListings = await Listing.find({ price: { $lt: intValue } }).sort({
+      price: 1,
+    });
+    return res.render("listings/index.ejs", { allListings });
+  }
+
+  allListings = await Listing.find({
+    $or: [
+      { title: { $regex: searchKey, $options: "i" } },
+      { category: { $regex: searchKey, $options: "i" } },
+      { country: { $regex: searchKey, $options: "i" } },
+      { location: { $regex: searchKey, $options: "i" } },
+    ],
+  });
+
+  if (allListings.length == 0) {
+    req.flash("error", "Listings is not here");
+    res.redirect("/listings");
+    return;
+  }
+
+  res.render("listings/index.ejs", { allListings });
 };
