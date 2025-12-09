@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const initDb = require("./data");
+const initDb = require("./data2");
 const Listing = require("../modles/listing");
 const MONGO_URL = "mongodb://127.0.0.1:27017/rentals";
 
@@ -18,7 +18,7 @@ async function main() {
 async function initDB() {
   await Listing.deleteMany({});
   initDb.data = initDb.data.map((obj) => {
-    return { ...obj, owner: "68cc060fc4cc6fdacf066d88" };
+    return { ...obj, owner: "69341b5e773cab19726b18f8" };
   });
   await Listing.insertMany(initDb.data);
   console.log(initDb.data);
