@@ -18,13 +18,15 @@
       />
       <h1>Livana Propert Rentals</h1>
     </a>
-    <div class="search">
-      <input type="text" placeholder="Search Destination" />
-      <button>
-        <span>Search</span>
-        <i class="fa-solid fa-magnifying-glass searchIcon"></i>
-      </button>
-    </div>
+    <form action="/listings/search/result" method="get">
+      <div class="search">
+        <input type="text" placeholder="Search Destination" name="q" />
+        <button type="submit">
+          <span>Search</span>
+          <i class="fa-solid fa-magnifying-glass searchIcon"></i>
+        </button>
+      </div>
+    </form>
 
     <div class="ham">
       <button class="btn1">

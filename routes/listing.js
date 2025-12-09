@@ -41,4 +41,12 @@ router.get(
   wrapAsync(listingController.renderEditForm)
 );
 
+//Filter Path
+
+router.get("/filter/:categoryName", listingController.categoryFilter);
+
+//Search Path
+
+router.get("/search/result", listingController.searchResult);
+
 module.exports = router;
