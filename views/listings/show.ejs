@@ -1,14 +1,24 @@
 <%- layout("/layouts/boilerPlate.ejs") %>
 <link rel="stylesheet" href="/css/showPage.css" />
 
+<!-- MapBox Script -->
 <script>
   const mapToken = "<%= process.env.MAP_KEY%>";
   // const coordinates = <%-JSON.stringify(listing.geometry.coordinates)%>
 </script>
 
+<!-- Image Slider Script -->
 <script>
   window.sliderImages = <%-JSON.stringify(listing.image)%>;
+  window.price = <%= listing.price %>;
 </script>
+
+<!-- Calender(Lite Picker) Js -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
 
 <div class="row">
   <div class="col-8 offset-3">
@@ -177,39 +187,124 @@
   <% } %>
 </div>
 
-<div class="slider">
-  <div class="fullSlider hidden">
-    <div class="arrow leftArrow">
-      <i class="fa-solid fa-angle-left" id="prevBtn"></i>
+<div class="listing-details">
+  <div class="title">
+    <h1><%=listing.title%></h1>
+    <div>
+      <i class="fa-regular fa-heart"></i>
+      <span>Save</span>
     </div>
-
-    <div class="imgContainer">
-      <img id="fullImage" alt="" />
-    </div>
-
-    <div class="arrow rightArrow">
-      <i class="fa-solid fa-angle-left" id="nextBtn"></i>
-    </div>
-
-    <div class="close" id="closeSlider"><i class="fa-solid fa-xmark"></i></div>
   </div>
-  <div class="bigImg">
-    <img
-      src="<%=listing.image[0].url%>"
-      class=""
-      alt="listing_img"
-      onclick="openSlider(0)"
-    />
+  <div class="slider">
+    <div class="fullSlider hidden">
+      <div class="arrow leftArrow">
+        <i class="fa-solid fa-angle-left" id="prevBtn"></i>
+      </div>
+
+      <div class="imgContainer">
+        <img id="fullImage" alt="" />
+      </div>
+
+      <div class="arrow rightArrow">
+        <i class="fa-solid fa-angle-left" id="nextBtn"></i>
+      </div>
+
+      <div class="close" id="closeSlider">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+    <div class="bigImg">
+      <img
+        src="<%=listing.image[0].url%>"
+        class=""
+        alt="listing_img"
+        onclick="openSlider(0)"
+      />
+    </div>
+    <div class="smallImgs">
+      <%for(let i = 1; i<4; i++ ){%>
+      <img
+        src="<%=listing.image[i].url%>"
+        class=""
+        alt="listing_img"
+        onclick="openSlider(<%= i %>)"
+      />
+      <%}%>
+    </div>
   </div>
-  <div class="smallImgs">
-    <%for(let i = 1; i<4; i++ ){%>
-    <img
-      src="<%=listing.image[i].url%>"
-      class=""
-      alt="listing_img"
-      onclick="openSlider(<%= i %>)"
-    />
-    <%}%>
+  <div class="bottom-info">
+    <div class="loaction">
+      <i class="fa-solid fa-location-dot"></i>
+      <span> <%=listing.location%></span>
+    </div>
+    <h2 class="info-text">
+      <%=listing.category%> in <%=listing.city%>, <%=listing.state%>,
+      <%=listing.country%>
+    </h2>
+
+    <p class="offers">
+      <i class="fa-solid fa-bed"></i> <%=listing.bedrooms%> Bedrooms
+      &nbsp;&nbsp; <i class="fa-solid fa-bath"></i> <%=listing.bathrooms%>
+      Bathrooms &nbsp;&nbsp;
+      <i class="fa-solid fa-car"></i> <%=listing.garages%> Garages &nbsp;&nbsp;
+      <i class="fa-regular fa-square-full"></i> <%=listing.area%> Area
+    </p>
+
+    <hr />
+
+    <div class="profile">
+      <img src="/asset/User-Profile.jpg" width="40px" />
+      <h3>Hosted by <%=listing.owner.username%></h3>
+    </div>
+
+    <hr />
+
+    <h3>Description</h3>
+    <p><%=listing.description%></p>
+    <hr />
+
+    <div class="two-part">
+      <div class="aminities">
+        <h2>What this place offers?</h2>
+        <div class="aminities-items">
+          <% aminities.forEach(f => { %>
+          <div class="facility">
+            <i class="<%= f.icon %>"></i>
+            <span><%= f.name %></span>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+      <div class="booking-part">
+        <h2>How long do you want to stay?</h2>
+        <div class="date-range-calendar">
+          <input type="text" id="startDate" placeholder="Start Date" readonly />
+          <input type="text" id="endDate" placeholder="End Date" readonly />
+
+          <div class="datePlaceholder" id="datePlaceholder">
+            <p>Select your dates to calculate total price....</p>
+          </div>
+
+          <div class="price-details">
+            <div id="priceInfo">
+              <h2 id="nightPrice"><%=listing.price%> x 0 night</h2>
+              <h2 id="totalPrice">Total Price: ₹0</h2>
+
+              <p id="startDisplay">
+                <span>Start Date: </span><%= new Date(Date.now()).toDateString()
+                %>
+              </p>
+              <p id="endDisplay">
+                <span>End Date: </span> <%= new Date(Date.now()).toDateString()
+                %>
+              </p>
+            </div>
+          </div>
+
+          <button class="button" id="bookingBtn">BOOKING</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

@@ -2,6 +2,7 @@ const Listing = require("../modles/listing");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapToken = process.env.MAP_KEY;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
+const aminities = require("../data");
 
 const amenitiesList = {
   Pool: false,
@@ -60,7 +61,7 @@ module.exports.showListing = async (req, res) => {
     req.flash("error", "Listing you requested for doesn't  exist!");
     return res.redirect("/listings");
   }
-  res.render("listings/show.ejs", { listing });
+  res.render("listings/show.ejs", { listing, aminities });
 };
 
 module.exports.renderEditForm = async (req, res) => {

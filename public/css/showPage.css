@@ -1,3 +1,151 @@
+.conatiner {
+  padding-inline: 10rem !important;
+}
+
+/* Listing Page Styling */
+
+.listing-details {
+  margin-top: 1rem;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.4rem;
+}
+
+.title i {
+  font-size: 1.3rem;
+  color: red;
+  fill: red;
+}
+
+.title span {
+  font-size: 1.3rem;
+  color: black;
+  font-weight: 500;
+}
+
+.listing-details .title h1 {
+  font-size: 2rem !important ;
+  font-weight: 700;
+}
+
+.bottom-info {
+  margin-top: 1.5rem;
+}
+
+.loaction {
+  margin-block: 0.5rem;
+}
+
+.info-text {
+  font-size: 1.7rem;
+}
+
+.badge {
+  background-color: red;
+  color: white;
+  font-weight: 600;
+  padding: 9px;
+  font-size: 14px;
+}
+
+.offers {
+  margin-block: 1.5rem;
+}
+
+.profile {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 9px;
+}
+
+.profile h3 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.two-part {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.aminities h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.aminities-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 100px !important;
+  margin-block: 1.5rem;
+  gap: 10px;
+}
+
+.facility {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.facility i {
+  font-size: 1.4rem;
+}
+
+.facility span {
+  font-size: 1.1rem;
+}
+
+.booking-part h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.date-range-calendar {
+  margin-top: 2rem;
+}
+
+.date-range-calendar input {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.datePlaceholder {
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+#nightPrice {
+  margin-block: 20px;
+}
+
+#startDisplay {
+  margin-block: 25px;
+}
+
+#bookingBtn {
+  padding: 10px 40px 10px 40px;
+  background-color: rgb(247, 8, 8);
+  color: white;
+  font-size: 18px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: none;
+  margin-top: 12px;
+  width: 90%;
+}
+
+/* Image + Slider Styling */
+
 .slider {
   width: 100%;
   height: 30rem;
@@ -28,10 +176,6 @@
   img {
     height: 9.5rem;
   }
-}
-
-.conatiner {
-  padding-inline: 7rem !important;
 }
 
 /* Slider Styling */
@@ -97,7 +241,7 @@
 
 @media (max-width: 1000px) {
   .conatiner {
-    padding-inline: 1rem !important;
+    padding-inline: 2rem !important;
   }
 }
 
@@ -107,7 +251,10 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
+  .aminities-items {
+    grid-template-columns: 1fr;
+  }
   .slider {
     overflow-x: scroll;
     img {
