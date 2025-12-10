@@ -36,7 +36,11 @@
 
 /* Slider Styling */
 
-.fullslider {
+.hidden {
+  display: none !important;
+}
+
+.fullSlider {
   position: absolute;
   left: 0;
   height: 100%;
@@ -46,9 +50,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
-.fullslider i {
+.fullSlider i {
   color: white;
   font-size: 3rem;
   font-weight: bold;
