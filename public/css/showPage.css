@@ -129,7 +129,8 @@
   margin-block: 25px;
 }
 
-#bookingBtn {
+#bookingBtn,
+.user-button {
   padding: 10px 40px 10px 40px;
   background-color: rgb(247, 8, 8);
   color: white;
@@ -142,6 +143,12 @@
   border: none;
   margin-top: 12px;
   width: 90%;
+}
+
+.user-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
 }
 
 /* Image + Slider Styling */
@@ -233,6 +240,82 @@
   cursor: pointer;
 }
 
+/* Reviews Styling */
+
+.review-section {
+  margin-top: 3rem;
+}
+
+.add-reviews-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.review-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.review-card {
+  padding: 20px 10px;
+  /* border: 1px solid rgba(150, 150, 150, 0.3); */
+  border-radius: 10px;
+}
+
+.user-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.personal-info {
+  display: flex;
+  gap: 15px;
+}
+
+.profile-img img {
+  width: 50px;
+}
+
+.username {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 2px;
+}
+
+.email {
+  font-size: 0.7rem;
+  font-weight: 500;
+  opacity: 1;
+  color: grey;
+}
+
+.ratings-stars {
+  transform: scale(0.7);
+}
+
+.comment {
+  margin-top: 5px;
+  padding: 12px;
+}
+
+/* Add Review Section */
+
+.leave-review-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+#comment {
+}
+
+.form-control {
+  box-shadow: none !important;
+  outline: none !important;
+  border: 1px solid rgb(137, 137, 137) !important;
+}
+
 @media (max-width: 1250px) {
   .conatiner {
     padding-inline: 4rem !important;
@@ -242,6 +325,10 @@
 @media (max-width: 1000px) {
   .conatiner {
     padding-inline: 2rem !important;
+  }
+  .review-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 }
 
