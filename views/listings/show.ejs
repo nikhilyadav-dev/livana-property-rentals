@@ -1,8 +1,6 @@
 <%- layout("/layouts/boilerPlate.ejs") %>
-<script>
-   const mapToken = "<%= process.env.MAP_KEY%>";
-  const coordinates = <%-JSON.stringify(listing.geometry.coordinates)%>
-</script>
+<link rel="stylesheet" href="/css/showPage.css" />
+
 <div class="row">
   <div class="col-8 offset-3">
     <h3><%=listing.title%></h3>
@@ -169,3 +167,44 @@
   </div>
   <% } %>
 </div>
+
+<div class="slider">
+  <div class="fullslider" id="fullslider">
+    <div class="arrow leftArrow">
+      <i class="fa-solid fa-angle-left" id="prevBtn"></i>
+    </div>
+
+    <div class="imgContainer">
+      <img
+        id="fullImage"
+        src="/asset/9515711c20274841758db3d35e593834.jpg"
+        alt=""
+      />
+    </div>
+
+    <div class="arrow rightArrow">
+      <i class="fa-solid fa-angle-left" id="nextBtn"></i>
+    </div>
+
+    <div class="close" id="closeSlider"><i class="fa-solid fa-xmark"></i></div>
+  </div>
+  <div class="bigImg">
+    <img src="<%=listing.image[0].url%>" class="" alt="listing_img" />
+  </div>
+  <div class="smallImgs">
+    <%for(let i = 1; i<4; i++ ){%>
+    <img src="<%=listing.image[i].url%>" class="" alt="listing_img" />
+    <%}%>
+  </div>
+</div>
+
+<script>
+  const mapToken = "<%= process.env.MAP_KEY%>";
+  // const coordinates = <%-JSON.stringify(listing.geometry.coordinates)%>
+</script>
+
+<script>
+  window.sliderImages = "<%-JSON.stringify(listing.image)%>";
+</script>
+
+<script src="/js/slider.js"></script>
