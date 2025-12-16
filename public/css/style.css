@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 
 /* basic styling */
 
 body {
-  font-family: "Nunito", sans-serif !important;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
   min-height: 100vh !important;
   display: flex;
   flex-direction: column;
@@ -64,30 +64,6 @@ Footer Styling
 /* ...............................
 Listing Card Styling
 ..................................*/
-
-.listing-card {
-  border: none;
-  margin-bottom: 2rem;
-}
-.card-img-top {
-  height: 20rem;
-  object-fit: cover;
-  width: 100%;
-  border-radius: 1rem;
-}
-
-.card-body {
-  padding: 0;
-}
-
-.card-img-overlay {
-  opacity: 0;
-}
-
-.card-img-overlay:hover {
-  opacity: 0.2;
-  background: #fff;
-}
 
 /* ...............................
 Map Styling
