@@ -253,6 +253,12 @@
   padding-right: 10px;
 }
 
+/* Toggler Style */
+
+.toggle-tax-slider:checked {
+  background-color: #000000;
+}
+
 /* Responsivness */
 
 @media (max-width: 1350px) {
