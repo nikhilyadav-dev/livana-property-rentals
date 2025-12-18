@@ -105,7 +105,7 @@
   </div>
 
   <div
-    class="text-toggler tax-filter-icon filterIcon me-2 ms-2"
+    class="text-toggler tax-filter-icon filterIcon me-2 ms-2 show-filter-button"
     onclick="filterClick()"
   >
     <div
@@ -122,12 +122,12 @@
   <div class="text-toggler">
     <div class="form-check form-switch form-check-reverse">
       <input
-        class="form-check-input"
+        class="form-check-input gstToggle"
         type="checkbox"
         role="switch"
         id="switchCheckDefault"
       />
-      <label class="form-check-label" for="switchCheckDefault"
+      <label class="form-check-label changeAfter" for="switchCheckDefault"
         >Display total after taxes</label
       >
     </div>
@@ -159,7 +159,10 @@
     <div class="card-Info">
       <div class="info-1">
         <h6><%=listing.category%></h6>
-        <div class="price">&#8377;<%=listing.price%> / night</div>
+        <div class="price price-info" data-price="<%=listing.price%> ">
+          &#8377;<%=listing.price%> / night
+        </div>
+        <span class="tax-info" style="display: none"></span>
       </div>
       <div class="title">
         <h4><%=listing.title%></h4>
