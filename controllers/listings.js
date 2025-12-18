@@ -22,15 +22,17 @@ module.exports.renderNewForm = (req, res) => {
 };
 
 module.exports.createListing = async (req, res, next) => {
-  //new way
-  // Validate body against Joi schema
+  const response = await geocodingClient
+    .forwardGeocode({
+      query: req.body.listing.location,
+      limit: 1,
+    })
+    .send();
 
-  // const response = await geocodingClient
-  //   .forwardGeocode({
-  //     query: req.body.listing.location,
-  //     limit: 1,
-  //   })
-  //   .send();
+  if (!response.body.features.length) {
+    req.flash("error", "Invalid location");
+    return res.redirect("/listings/new");
+  }
 
   const newListing = new Listing(req.body.listing);
 
@@ -43,7 +45,7 @@ module.exports.createListing = async (req, res, next) => {
 
     newListing.image = imageData;
   }
-  // newListing.geometry = response.body.features[0].geometry;
+  newListing.geometry = response.body.features[0].geometry;
 
   const ress = await newListing.save();
   console.log("newListing", ress);
@@ -61,7 +63,14 @@ module.exports.showListing = async (req, res) => {
     req.flash("error", "Listing you requested for doesn't  exist!");
     return res.redirect("/listings");
   }
-  res.render("listings/show.ejs", { listing, aminities });
+
+  // Nearby Listings
+
+  res.render("listings/show.ejs", {
+    listing,
+    aminities,
+    mapToken: process.env.MAP_KEY,
+  });
 };
 
 module.exports.renderEditForm = async (req, res) => {
@@ -73,9 +82,6 @@ module.exports.renderEditForm = async (req, res) => {
     return res.redirect("/listings");
   }
 
-  let originalImageUrl = listing.image.url;
-  // originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250");
-  // res.render("listings/edit.ejs", { listing, originalImageUrl });
   res.render("listings/edit.ejs", { listing });
 };
 
@@ -83,6 +89,17 @@ module.exports.updateListing = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
   const updatedList = req.body.listing;
+
+  if (req.body.listing.location !== listing.location) {
+    const geoResponse = await geocodingClient
+      .forwardGeocode({
+        query: req.body.listing.location,
+        limit: 1,
+      })
+      .send();
+
+    listing.geometry = geoResponse.body.features[0].geometry;
+  }
 
   // Update other fields
   Object.assign(listing, updatedList);
