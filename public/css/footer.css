@@ -6,7 +6,8 @@ footer {
 }
 
 footer .containerf {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
   justify-items: start;
   flex: 1 !important;
@@ -14,8 +15,10 @@ footer .containerf {
 }
 
 .footer-nav {
+  flex: 1;
   height: auto;
   padding-block-start: 3rem !important;
+  flex-basis: 300px;
 }
 
 .footer-para {
@@ -65,17 +68,18 @@ footer nav {
   height: 0.5px;
 }
 
-.ftr-copy {
+.containerf2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  grid-column: 1 / 4;
+  gap: 15px;
+
   width: 100%;
   font-size: 0.95rem;
 }
 
-.ftr-copy > div {
+.containerf2 > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -101,7 +105,7 @@ footer nav {
   width: 120px;
 }
 
-.ftr-copy a {
+.containerf2 a {
   color: black;
   opacity: 8;
 }
@@ -112,15 +116,19 @@ footer nav {
   font-weight: 700;
 }
 
-@media (min-width: 768px) {
+.containerf1 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.containerf2 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
   footer {
     margin-top: 8rem;
-  }
-
-  footer .containerf {
-    grid-template-columns: 1fr 1fr 1fr;
-    /* padding-block: 80px; */
-    justify-items: start;
   }
 
   .footer-para {
@@ -128,9 +136,5 @@ footer nav {
   }
 }
 
-@media (min-width: 440px) {
-  footer .containerf {
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: start;
-  }
+@media (max-width: 440px) {
 }
