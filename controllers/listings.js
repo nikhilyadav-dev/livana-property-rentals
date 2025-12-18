@@ -81,17 +81,30 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
   const { id } = req.params;
+  const listing = await Listing.findById(id);
   const updatedList = req.body.listing;
-  if (req.file) {
-    const { path, filename } = req.file;
-    if (!updatedList.image) {
-      updatedList.image = {};
-    }
-    updatedList.image.filename = filename;
-    updatedList.image.url = path;
+
+  // Update other fields
+  Object.assign(listing, updatedList);
+
+  // 🔥 IMAGE REPLACEMENT LOGIC
+  if (req.files && req.files.length > 0) {
+    req.files.forEach((file) => {
+      // Extract index from fieldname: listing[images][2]
+      const match = file.fieldname.match(/\[(\d+)\]/);
+      if (!match) return;
+
+      const index = Number(match[1]);
+
+      listing.image[index] = {
+        url: file.path,
+        filename: file.filename,
+      };
+    });
   }
-  console.log(updatedList);
-  await Listing.findByIdAndUpdate(id, updatedList);
+
+  console.log(listing);
+  await listing.save();
   req.flash("success", "Listing Updated");
   res.redirect(`/listings/${id}`);
 };

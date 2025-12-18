@@ -1,6 +1,8 @@
 <%- layout("/layouts/boilerPlate.ejs") %>
 <link rel="stylesheet" href="/css/editPage.css" />
 
+<script src="/js/script.js"></script>
+
 <div class="new-list">
   <form
     method="POST"
@@ -164,16 +166,17 @@
 
     <div class="amenities list-input">
       <label class="form-label">Aminities</label>
+
       <% const aminities = ['Pool', 'Parking', 'Wifi', 'Gym', 'Garden']; %> <%
-      aminities.forEach((amenity, index) => { %> <% const isInclude =
+      for (let amenity of aminities) { %> <% const isInclude =
       listing.aminities.includes(amenity); %>
 
       <div class="amenities-input">
         <input type="checkbox" name="listing[aminities]" value="<%= amenity %>"
-        id="amenity<%= index %>" <%= isInclude ? "checked" : "" %> />
-        <label for="amenity<%= index %>"><%= amenity %></label>
+        <%= isInclude ? "checked" : "" %> />
+        <label><%= amenity %></label>
       </div>
-      <% }) %>
+      <% } %>
     </div>
 
     <div class="image-container list-input">
@@ -202,11 +205,10 @@
           <input
             type="file"
             id="image<%= i %>"
-            name="listing[images][]"
+            name="listing[images][<%= i %>]"
             accept="image/*"
             onchange="previewImage(event, <%= i %>)"
             hidden
-            required
           />
 
           <div
@@ -243,7 +245,7 @@
       />
     </div>
 
-    <button class="btn-success input-btn">
+    <button class="btn-success input-btn" type="submit">
       <span> Update Poperty</span>
       <i class="fa-solid fa-user-plus"></i>
     </button>
@@ -258,5 +260,3 @@
     preview.src = URL.createObjectURL(event.target.files[0]);
   }
 </script>
-
-<script src="/js/script.js"></script>
