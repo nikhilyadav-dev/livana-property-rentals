@@ -150,7 +150,7 @@
 .hamburger-list {
   position: absolute;
   width: 220px;
-  height: 230px;
+  /* height: 230px; */
   background-color: white;
   right: 2%;
   top: 90%;
@@ -160,7 +160,7 @@
   align-items: start;
   justify-content: center;
   flex-direction: column;
-  padding: 10px;
+  padding: 20px;
   box-sizing: border-box;
   transform: scale(0.4);
   visibility: hidden;
@@ -171,7 +171,7 @@
 .hamburger-list.active {
   position: absolute;
   width: 220px;
-  height: 230px;
+  /* height: 230px; */
   background-color: white;
   right: 2%;
   top: 90%;
@@ -181,7 +181,7 @@
   align-items: start;
   justify-content: center;
   flex-direction: column;
-  padding: 10px;
+  padding: 20px;
   box-sizing: border-box;
   visibility: visible;
   opacity: 1;

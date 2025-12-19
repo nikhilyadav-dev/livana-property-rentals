@@ -7,11 +7,6 @@
 />
 
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-  }
-
   #map {
     width: 100%;
     height: 450px;
@@ -27,6 +22,22 @@
     font-size: 14px;
     background: #111;
     color: #fff;
+  }
+
+  .wishlist-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: #e91e63;
+  }
+
+  .wishlist-btn i.far {
+    color: #777;
+  }
+
+  .wishlist-btn i.fas {
+    color: #e91e63;
   }
 </style>
 
@@ -52,9 +63,17 @@
 <div class="listing-details">
   <div class="title">
     <h1><%=listing.title%></h1>
-    <div>
-      <i class="fa-regular fa-heart"></i>
+    <div class="wishlist">
+      <% if (currUser) { %>
+      <button
+        class="wishlist-btn"
+        data-user="<%= currUser ? currUser._id : '' %>"
+        data-listing="<%= listing._id %>"
+      >
+        <i class="far fa-heart"></i>
+      </button>
       <span>Save</span>
+      <% } %>
     </div>
   </div>
   <div class="slider">
@@ -319,6 +338,32 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 
 <script>
+  //WishList Logic
+
+  const btn = document.querySelector(".wishlist-btn");
+  console.log(btn);
+
+  btn.addEventListener("click", () => {
+    const userId = btn.dataset.user;
+    const listingId = btn.dataset.listing;
+
+    if (!userId) {
+      alert("Login first");
+      return;
+    }
+
+    fetch(`/wishlist/${userId}/${listingId}`, {
+      method: "PATCH",
+    });
+
+    // Toggle heart UI (frontend only)
+    const icon = btn.querySelector("i");
+    icon.classList.toggle("fas");
+    icon.classList.toggle("far");
+  });
+
+  //Map Js
+
   mapboxgl.accessToken = "<%= mapToken %>";
 
   console.log(coordinates);

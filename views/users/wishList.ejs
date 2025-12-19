@@ -1,0 +1,60 @@
+<% layout("/layouts/boilerPlate.ejs") %>
+<link rel="stylesheet" href="/css/wishList.css" />
+<h1 class="title-h1">
+  Your Wish List - <%= wishLists.length %><i class="fa-solid fa-heart"></i>
+</h1>
+<div class="card-container">
+  <%for(let listing of wishLists){%>
+
+  <div class="listing-card" onclick="goToListing('<%= listing.id %>')">
+    <div class="slider-container">
+      <div class="left" onclick="prevSlide(event,this)">
+        <i class="fa-solid fa-caret-left"></i>
+      </div>
+      <div class="image-container">
+        <% for(let i = 0; i<4; i++) { %>
+        <div class="slider">
+          <img src="<%=listing.image[i].url%>" alt="listing_img" />
+        </div>
+        <% } %>
+      </div>
+      <div class="right" onclick="nextSlide(event, this)">
+        <i class="fa-solid fa-caret-right"></i>
+      </div>
+    </div>
+
+    <div class="card-img-overlay"></div>
+
+    <div class="card-Info">
+      <div class="info-1">
+        <h6><%=listing.category%></h6>
+        <div class="price price-info" data-price="<%=listing.price%> ">
+          &#8377;<%=listing.price%> / night
+        </div>
+        <span class="tax-info" style="display: none"></span>
+      </div>
+      <div class="title">
+        <h4><%=listing.title%></h4>
+      </div>
+      <div class="offers">
+        <div class="offer offer-1">
+          <i class="fa-solid fa-bed"></i> <%=listing.bedrooms%> &nbsp;&nbsp;
+        </div>
+        <div class="offer offer-2">
+          <i class="fa-solid fa-bath"></i> <%=listing.bathrooms%> &nbsp;&nbsp;
+        </div>
+
+        <div class="offer offer-3">
+          <i class="fa-solid fa-car"></i> <%=listing.garages%> &nbsp;&nbsp;
+        </div>
+
+        <div class="offer offer-4">
+          <i class="fa-regular fa-square-full"></i> <%=listing.area%>
+        </div>
+      </div>
+      <p class="description"><%= listing.description %></p>
+    </div>
+  </div>
+
+  <%}%>
+</div>

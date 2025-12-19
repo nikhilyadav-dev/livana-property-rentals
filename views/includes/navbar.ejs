@@ -2,12 +2,31 @@
 
 <header class="header sticky-top">
   <div class="hamburger-list">
+    <% if(!currUser){ %>
     <div class="ham-item"><a class="nav-link" href="/login">Login</a></div>
     <div class="ham-item"><a class="nav-link" href="/signup">Sign up</a></div>
+    <% }%>
     <div class="ham-item"><a class="nav-link" href="/listings">Explore</a></div>
+
+    <% if(currUser){ %>
+
+    <div class="ham-item">
+      <a class="nav-link" href="/wishlist/<%= currUser._id %>">Wish List</a>
+    </div>
+
+    <div class="ham-item">
+      <a class="nav-link" href="/myproperty/<%= currUser._id %>">My Property</a>
+    </div>
+
+    <% }%>
+
     <div class="ham-item">
       <a class="nav-link" href="/contact">Help center</a>
     </div>
+    <% if(currUser){ %>
+    <div class="ham-item"><a class="nav-link" href="/logout">Logout</a></div>
+
+    <% }%>
   </div>
   <div class="nav-container">
     <a href="/listings" class="logo">

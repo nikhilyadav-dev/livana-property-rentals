@@ -7,6 +7,19 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  wishList: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Listing",
+    },
+  ],
+  propertyList: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Listing",
+    },
+  ],
+
   providerId: String,
   provider: String,
 });

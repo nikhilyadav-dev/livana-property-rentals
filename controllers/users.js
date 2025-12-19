@@ -70,3 +70,40 @@ module.exports.contactHandle = async (req, res) => {
   req.flash("success", "Message sent successfully");
   res.redirect("/contact");
 };
+
+// Wishlist
+
+module.exports.addToWishList = async (req, res) => {
+  const { userId, listingId } = req.params;
+  console.log("working", userId, listingId);
+  const user = await User.findById(userId);
+  const exists = user.wishList.includes(listingId);
+  if (exists) {
+    user.wishList.pull(listingId);
+    await user.save();
+    req.flash("success", "Added to wishList");
+    return res.redirect(`/listings/${listingId}`);
+  } else {
+    user.wishList.push(listingId);
+    await user.save();
+    return res.redirect(`/listings/${listingId}`);
+  }
+};
+
+// Show Wish List
+
+module.exports.renderWishList = async (req, res) => {
+  let { userId } = req.params;
+  const user = await User.findById(userId).populate("wishList");
+  const wishLists = user.wishList;
+  res.render("users/wishList.ejs", { wishLists });
+};
+
+// Show My Property
+
+module.exports.renderMyProperty = async (req, res) => {
+  let { userId } = req.params;
+  const user = await User.findById(userId).populate("propertyList");
+  const propertyLists = user.propertyList;
+  res.render("users/wishList.ejs", { propertyLists });
+};

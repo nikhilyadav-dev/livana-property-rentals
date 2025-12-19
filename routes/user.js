@@ -30,4 +30,12 @@ router
   .get(userController.renderContactForm)
   .post(wrapAsync(userController.contactHandle));
 
+router
+  .route("/wishlist/:userId/:listingId")
+  .patch(wrapAsync(userController.addToWishList));
+
+router.route("/wishlist/:userId").get(userController.renderWishList);
+
+router.route("/myproperty/:userId").get(userController.renderMyProperty);
+
 module.exports = router;
