@@ -107,6 +107,6 @@ const facilities = [
     name: "Pet allowed",
     icon: "fa-solid fa-paw",
   },
-];
+]; 
 
 module.exports = facilities;
