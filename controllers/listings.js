@@ -1,4 +1,5 @@
 const Listing = require("../modles/listing");
+const User = require("../modles/user");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapToken = process.env.MAP_KEY;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
@@ -49,6 +50,14 @@ module.exports.createListing = async (req, res, next) => {
 
   const ress = await newListing.save();
   console.log("newListing", ress);
+
+  // Add To My Property
+  const propertyOwner = await User.findById(req.user._id);
+
+  if (!propertyOwner.propertyList.includes(ress._id)) {
+    propertyOwner.propertyList.push(ress._id);
+    await propertyOwner.save();
+  }
 
   req.flash("success", "New Listing Created");
   res.redirect("/listings");

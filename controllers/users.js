@@ -105,5 +105,6 @@ module.exports.renderMyProperty = async (req, res) => {
   let { userId } = req.params;
   const user = await User.findById(userId).populate("propertyList");
   const propertyLists = user.propertyList;
-  res.render("users/wishList.ejs", { propertyLists });
+  console.log(propertyLists);
+  res.render("users/propertyList.ejs", { propertyLists });
 };

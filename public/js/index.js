@@ -96,7 +96,7 @@ gstToggle.addEventListener("change", () => {
       priceEl.style.display = "none";
       taxEls[index].style.display = "inline";
       taxEls[index].style.fontWeight = "600";
-      taxEls[index].innerText = `₹${gstPrice} / night`;
+      taxEls[index].innerText = `₹${gstPrice} / qnight`;
     } else {
       priceEl.style.display = "inline";
       taxEls[index].style.display = "none";
