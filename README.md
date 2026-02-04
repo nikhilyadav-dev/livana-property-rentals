@@ -1,17 +1,18 @@
 # 🏡 Livana Full-Stack Web Application
 
-A production-grade, full-stack web application inspired by Airbnb.  
+A production-grade, full-stack web application.  
 Built using **Node.js**, **Express.js**, **MongoDB**, and enhanced with **cloud image storage**, **social login**, **map integration**, and **secure authentication systems**.
 
 ---
 
 ## 🎯 Project Overview
 
-This project recreates the essential workflow of Airbnb with a focus on **property listings**, **user accounts**, **reviews**, and **location-based interactions**.  
-The system supports multiple authentication strategies, secure session handling, image uploads, and dynamically rendered UI templates.
+This project delivers a full-featured property management and booking system focused on listings, user accounts, reviews, and location-based interactions.
+It includes multiple authentication methods, secure session handling, cloud-based image storage, and dynamically rendered UI pages for a smooth user experience.
+
+---
 
 ## 📸 Screenshots 
-Here's a visual tour of AI Career Forge:
 
 | Screenshot 1 | Screenshot 2 |
 |--------------|--------------|
@@ -214,7 +215,7 @@ livana-property-rentals/
 │   └── schema.js                         # Joi validation schemas
 
 ```
-### User Workflow 📊
+### 📊 User Workflow 
 
 1. 👉 User signs up or logs in
 2. 🏠 User creates a property listing
@@ -230,66 +231,85 @@ livana-property-rentals/
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/your-username/Airbnb_Clone.git
-cd Airbnb_Clone
+git clone https://github.com/nikhilyadav-dev/livana-property-rentals.git
+cd livana-property-rentals
 ```
 ### 2️⃣ Install Dependencies
 ```bash
 npm install
 ```
 ### 3️⃣ Add Environment Variables
-
 Create a .env file:
     
-    ```bash
-    #https://cloudinary.com/  (Cloudinary) (Change key)
-    CLOUD_NAME=kjkdmckdhjks
-    CLOUD_API_KEY=89340593499490394
-    CLOUD_API_SECRET=jdskLKJlklkdlsdfkKKdsdkkd
+   ```bash
+# Cloudinary Configuration
+CLOUD_NAME=your_cloudinary_cloud_name
+CLOUD_API_KEY=your_cloudinary_api_key
+CLOUD_API_SECRET=your_cloudinary_api_secret
 
-    #https://www.mapbox.com/ (Mapbox)
-    MAP_TOKEN=pk.eyJ1IjoiZGVsdGEtc3R1ZHVlbnQiLCJhIjoiY2xvMDk0MTVhMTJ3ZDJrcGR5ZDFkaHl4ciJ9.Gj2VU1wvxc7rFVt5E4KLOQ
+# Mapbox Configuration
+MAP_KEY=your_mapbox_access_token
 
-    #https://www.mongodb.com/ (MongoDb Atlas) (Change key)
-    ATLASDB_URL=mongodb+srv://demo:kLKJFKOEMNDDOI9089dndd@cluster0.kkdnvkdkds.mongodb.net/?retryWrites=true&w=majority
+# SMTP / Email Configuration
+SMTP_SERVICE=gmail
+SMTP_MAIL=your_email_address
+SMTP_PASSWORD=your_app_password
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_TO=receiver_email_for_contact_forms
 
-    #Add Random Secret Key
-    SECRET=ckcdenlksufoifafknddsoiddfkadsfafd
+# Google OAuth Configuration
+GOOGLE_CLIENT_ID=your_google_oauth_client_id
+GOOGLE_CLIENT_SECRET=your_google_oauth_client_secret
 
-    #https://console.developers.google.com/ (Google Developer Console) (Change key)
-    GOOGLE_CLIENT_ID=89038948394-kjfdkcmckdmckdfsid94jkkknd9sd4.apps.googleusercontent.com
-    GOOGLE_CLIENT_SECRET=KDJKDF-4KJDF894NF-DFKEF9MN-NFKEJD
+# Facebook OAuth Configuration
+FACEBOOK_APP_ID=your_facebook_app_id
+FACEBOOK_APP_SECRET=your_facebook_app_secret
 
-    #https://developers.facebook.com/ (Facebook Developer Console) (Change key)
-    FACEBOOK_APP_ID=94383859383287
-    FACEBOOK_APP_SECRET=89diodfjd9r98ddfjsodwj9df8d
+# Google Maps (Frontend) APIs
+GOOGLE_MAP_API_KEY=your_google_map_api_key
+GOOGLE_PLACES=your_google_places_api_key
 
-    #Add redirect URL in Google Developer Console
-    GOOGLE_CALLBACK_URL=http://localhost:8080/auth/google/callback
 
-    #Add redirect URL in Facebook Developer Console
-    FACEBOOK_CALLBACK_URL=http://localhost:8080/auth/facebook/callback
-
-    ```
+   ```
 
     Replace the values with your specific configurations.
 
 ### 4️⃣ Run the Application
 
-    ```bash
+  ```bash
     node app.js
-    ```
+   ```
 
 ### 5️⃣ Open App in Browser
 
-    Open `http://localhost:8080/listings` in your web browser.
+  Open `http://localhost:8080/listings` in your web browser.
 
 
 ---
-👤 Author
 
-Nikhil Yadav 
-📧 Email: nikhilyadav.prof@gmail.com
-🔗 LinkedIn: `www.linkedin.com/in/nikhilyadav-developer`
+## 🤝 Contributing 
+Contributions are welcome! If you'd like to contribute, please follow these steps:
+
+1.  Fork the repository.
+2.  Create a new branch (`git checkout -b feature/your-feature-name`).
+3.  Make your changes and commit them (`git commit -m 'Add some feature'`).
+4.  Push to the branch (`git push origin feature/your-feature-name`).
+5.  Open a Pull Request.
+
+Please ensure your code adheres to the existing style and that any new features are well-tested. 
+
+---
+
+### 👤 Author
+
+<div>
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nikhilyadav-developer)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/nikhilyadav-dev)
+[![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:nikhilyadav.prof@gmail.com)
+
+</div>
+
 
 
