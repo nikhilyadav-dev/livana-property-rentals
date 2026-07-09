@@ -65,17 +65,17 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Passport
+passport.use(new LocalStretgy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
   next();
 });
-
-//Passport
-passport.use(new LocalStretgy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 main()
   .then(() => {
