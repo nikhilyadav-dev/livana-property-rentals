@@ -64,9 +64,9 @@ module.exports.renderContactForm = (req, res) => {
 module.exports.contactHandle = async (req, res) => {
   const { fullname, email, subject, message } = req.body;
   const emailMessage = generateEmailTemplate(fullname, email, message);
-  console.log("route before email sent");
+
   sendEmail({ email, subject, emailMessage });
-  console.log("route after email sent");
+
   req.flash("success", "Message sent successfully");
   res.redirect("/contact");
 };
@@ -75,7 +75,7 @@ module.exports.contactHandle = async (req, res) => {
 
 module.exports.addToWishList = async (req, res) => {
   const { userId, listingId } = req.params;
-  console.log("working", userId, listingId);
+
   const user = await User.findById(userId);
   const exists = user.wishList.includes(listingId);
   if (exists) {
@@ -105,6 +105,6 @@ module.exports.renderMyProperty = async (req, res) => {
   let { userId } = req.params;
   const user = await User.findById(userId).populate("propertyList");
   const propertyLists = user.propertyList;
-  console.log(propertyLists);
+
   res.render("users/propertyList.ejs", { propertyLists });
 };

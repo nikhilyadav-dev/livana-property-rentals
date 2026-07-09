@@ -49,7 +49,6 @@ module.exports.createListing = async (req, res, next) => {
   newListing.geometry = response.body.features[0].geometry;
 
   const ress = await newListing.save();
-  console.log("newListing", ress);
 
   // Add To My Property
   const propertyOwner = await User.findById(req.user._id);
@@ -113,7 +112,7 @@ module.exports.updateListing = async (req, res) => {
   // Update other fields
   Object.assign(listing, updatedList);
 
-  // 🔥 IMAGE REPLACEMENT LOGIC
+  // IMAGE REPLACEMENT LOGIC
   if (req.files && req.files.length > 0) {
     req.files.forEach((file) => {
       // Extract index from fieldname: listing[images][2]
@@ -129,7 +128,6 @@ module.exports.updateListing = async (req, res) => {
     });
   }
 
-  console.log(listing);
   await listing.save();
   req.flash("success", "Listing Updated");
   res.redirect(`/listings/${id}`);

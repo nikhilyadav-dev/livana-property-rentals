@@ -15,7 +15,7 @@ router.route("/").get(wrapAsync(listingController.index)).post(
   isLoggedIn,
 
   upload.array("listing[images][]", 4),
-  wrapAsync(listingController.createListing)
+  wrapAsync(listingController.createListing),
 );
 
 router.get("/new", isLoggedIn, listingController.renderNewForm);
@@ -28,7 +28,7 @@ router
     isOwner,
     validateListing,
     upload.any(),
-    wrapAsync(listingController.updateListing)
+    wrapAsync(listingController.updateListing),
   )
 
   .delete(isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
@@ -38,7 +38,7 @@ router.get(
   "/:id/edit",
   isLoggedIn,
   isOwner,
-  wrapAsync(listingController.renderEditForm)
+  wrapAsync(listingController.renderEditForm),
 );
 
 //Filter Path

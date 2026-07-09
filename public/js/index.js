@@ -32,8 +32,6 @@ filtersBox.addEventListener("scroll", () => {
     filtersBox.scrollLeft >= filtersBox.scrollWidth - filtersBox.clientWidth - 5
       ? "none"
       : "flex";
-  console.log(filtersBox.scrollWidth);
-  console.log(filtersBox.scrollWidth - filtersBox.clientWidth);
 });
 
 // Image Slider
@@ -80,17 +78,14 @@ const gstToggle = document.querySelector(".gstToggle");
 const priceEls = document.querySelectorAll(".price-info");
 const taxEls = document.querySelectorAll(".tax-info");
 const changeAfter = document.querySelectorAll(".changeAfter");
-console.log(priceEls);
 
 const GST_RATE = 0.18;
 
 gstToggle.addEventListener("change", () => {
   priceEls.forEach((priceEl, index) => {
     const basePrice = Number(priceEl.dataset.price);
-    console.log(basePrice);
-    const gstPrice = Math.round(basePrice + basePrice * GST_RATE);
 
-    console.log(gstPrice);
+    const gstPrice = Math.round(basePrice + basePrice * GST_RATE);
 
     if (gstToggle.checked) {
       priceEl.style.display = "none";

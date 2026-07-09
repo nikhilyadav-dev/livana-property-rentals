@@ -6,9 +6,6 @@ window.addEventListener("scroll", (e) => {
   header.classList[window.scrollY > 50 ? "add" : "remove"]("active");
 });
 
-console.log(hamburger);
-console.log(hamList);
-
 hamburger.addEventListener("click", () => {
   hamList.classList.toggle("active");
 });

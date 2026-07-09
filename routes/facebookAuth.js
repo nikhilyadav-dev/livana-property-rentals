@@ -4,7 +4,7 @@ const passport = require("../controllers/facebookAuth");
 
 router.get(
   "/",
-  passport.authenticate("facebook", { scope: ["public_profile"] })
+  passport.authenticate("facebook", { scope: ["public_profile"] }),
 );
 
 router.get(
@@ -12,7 +12,7 @@ router.get(
   passport.authenticate("facebook", { failureRedirect: "/login" }),
   function (req, res) {
     res.redirect("/listings");
-  }
+  },
 );
 
 module.exports = router;

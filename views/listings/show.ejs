@@ -1,64 +1,28 @@
 <%- layout("/layouts/boilerPlate.ejs") %>
+
+<!-- Styles -->
 <link rel="stylesheet" href="/css/showPage.css" />
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css"/>
 
-<link
-  href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
-  rel="stylesheet"
-/>
 
-<style>
-  #map {
-    width: 100%;
-    height: 450px;
-    border-radius: 12px;
-    margin-top: 10px;
-  }
 
-  .toggle-btn {
-    padding: 8px 14px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    background: #111;
-    color: #fff;
-  }
-
-  .wishlist-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 22px;
-    color: #e91e63;
-  }
-
-  .wishlist-btn i.far {
-    color: #777;
-  }
-
-  .wishlist-btn i.fas {
-    color: #e91e63;
-  }
-</style>
-
-<!-- MapBox Script -->
+<script> const listing = <%- JSON.stringify(listing) %>; </script>
 <script>
+// MapBox Script
   const mapToken = "<%= process.env.MAP_KEY%>";
   const coordinates = <%-JSON.stringify(listing.geometry.coordinates)%>
-</script>
-
-<!-- Image Slider Script -->
-<script>
+// Image Slider Script
   window.sliderImages = <%-JSON.stringify(listing.image)%>;
   window.price = <%= listing.price %>;
 </script>
-
-<!-- Calender(Lite Picker) Js -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css"
-/>
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"></script>
+
+
+
+
 
 <div class="listing-details">
   <div class="title">
@@ -76,20 +40,18 @@
       <% } %>
     </div>
   </div>
+
   <div class="slider">
     <div class="fullSlider hidden">
       <div class="arrow leftArrow">
         <i class="fa-solid fa-angle-left" id="prevBtn"></i>
       </div>
-
       <div class="imgContainer">
         <img id="fullImage" alt="" />
       </div>
-
       <div class="arrow rightArrow">
         <i class="fa-solid fa-angle-left" id="nextBtn"></i>
       </div>
-
       <div class="close" id="closeSlider">
         <i class="fa-solid fa-xmark"></i>
       </div>
@@ -97,7 +59,6 @@
     <div class="bigImg">
       <img
         src="<%=listing.image[0].url%>"
-        class=""
         alt="listing_img"
         onclick="openSlider(0)"
       />
@@ -106,13 +67,13 @@
       <%for(let i = 1; i<4; i++ ){%>
       <img
         src="<%=listing.image[i].url%>"
-        class=""
         alt="listing_img"
         onclick="openSlider(<%= i %>)"
       />
       <%}%>
     </div>
   </div>
+
   <div class="bottom-info">
     <div class="loaction">
       <i class="fa-solid fa-location-dot"></i>
@@ -125,8 +86,9 @@
 
     <p class="offers">
       <i class="fa-solid fa-bed"></i> <%=listing.bedrooms%> Bedrooms
-      &nbsp;&nbsp; <i class="fa-solid fa-bath"></i> <%=listing.bathrooms%>
-      Bathrooms &nbsp;&nbsp;
+      &nbsp;&nbsp;
+      <i class="fa-solid fa-bath"></i> <%=listing.bathrooms%> Bathrooms
+      &nbsp;&nbsp;
       <i class="fa-solid fa-car"></i> <%=listing.garages%> Garages &nbsp;&nbsp;
       <i class="fa-regular fa-square-full"></i> <%=listing.area%> Area
     </p>
@@ -145,6 +107,7 @@
     <hr />
 
     <div class="two-part">
+      <!-- ── Left: Amenities ── -->
       <div class="aminities">
         <h2>What this place offers?</h2>
         <div class="aminities-items">
@@ -156,60 +119,146 @@
           <% }) %>
         </div>
       </div>
+
+      <!-- ══════════════════════════════════════
+           RIGHT: BOOKING WIDGET
+           Replaces the old "How long do you want to stay?" section
+      ══════════════════════════════════════ -->
       <div class="booking-part">
         <h2>How long do you want to stay?</h2>
-        <div class="date-range-calendar">
-          <input type="text" id="startDate" placeholder="Start Date" readonly />
-          <input type="text" id="endDate" placeholder="End Date" readonly />
 
-          <div class="datePlaceholder" id="datePlaceholder">
-            <p>Select your dates to calculate total price....</p>
-          </div>
+        <!-- Only show booking widget to non-owners -->
+        <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
 
-          <div class="price-details">
-            <div id="priceInfo">
-              <h2 id="nightPrice"><%=listing.price%> x 0 night</h2>
-              <h2 id="totalPrice">Total Price: ₹0</h2>
-
-              <p id="startDisplay">
-                <span>Start Date: </span><%= new Date(Date.now()).toDateString()
-                %>
-              </p>
-              <p id="endDisplay">
-                <span>End Date: </span> <%= new Date(Date.now()).toDateString()
-                %>
-              </p>
+          <!-- Owner sees Edit/Delete buttons (unchanged) -->
+          <div class="date-range-calendar">
+            <div class="price-details">
+              <div class="user-buttons">
+                <a href="/listings/<%=listing.id%>/edit" class="user-button">Edit</a>
+                <form action="/listings/<%= listing.id %>?_method=Delete" method="post">
+                  <button class="user-button">Delete</button>
+                </form>
+              </div>
             </div>
           </div>
 
-          <% if(currUser && currUser._id.equals(listing.owner._id)) {%>
+        <% } else { %>
 
-          <div class="user-buttons">
-            <a href="/listings/<%=listing.id%>/edit" class="user-button"
-              >Edit</a
+          <!-- ── BOOKING WIDGET ── -->
+          <div class="booking-widget">
+            <div class="booking-widget__header">
+              <span class="booking-widget__price">₹<%= listing.price.toLocaleString() %></span>
+              <span class="booking-widget__per">/ night</span>
+            </div>
+
+            <!-- STEP 1: Pick dates & check availability -->
+            <div class="bw-dates-grid">
+              <div class="bw-field">
+                <label for="bwCheckIn">
+                  <i class="fa-regular fa-calendar"></i> Check-In
+                </label>
+                <input
+                  type="date"
+                  id="bwCheckIn"
+                  min="<%= new Date().toISOString().split('T')[0] %>"
+                />
+              </div>
+              <div class="bw-field">
+                <label for="bwCheckOut">
+                  <i class="fa-regular fa-calendar"></i> Check-Out
+                </label>
+                <input
+                  type="date"
+                  id="bwCheckOut"
+                  disabled
+                />
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="bw-check-btn"
+              id="bwCheckBtn"
+              onclick="bwCheckAvailability()"
             >
+              Check Availability
+            </button>
 
+            <!-- Availability Result Message -->
+            <div class="bw-avail-result" id="bwAvailResult"></div>
+
+            <!-- STEP 2: Booking form — shown only when available -->
             <form
-              action="/listings/<%= listing.id %>?_method=Delete"
-              method="post"
+              action="/bookings/book"
+              method="POST"
+              id="bwBookingForm"
             >
-              <button class="user-button">Delete</button>
+              <!-- Hidden fields populated by JS -->
+              <input type="hidden" name="listingId" value="<%= listing._id %>" />
+              <input type="hidden" name="checkInDate"  id="bwFormCheckIn" />
+              <input type="hidden" name="checkOutDate" id="bwFormCheckOut" />
+
+              <div class="bw-divider"></div>
+
+              <div class="bw-field" style="margin-bottom:12px;">
+                <label for="bwGuests">
+                  <i class="fa-solid fa-user"></i> Guests
+                </label>
+                <input
+                  type="number"
+                  name="guests"
+                  id="bwGuests"
+                  min="1"
+                  max="10"
+                  value="1"
+                  required
+                />
+              </div>
+
+              <div class="bw-field" style="margin-bottom:14px;">
+                <label for="bwPayment">
+                  <i class="fa-solid fa-credit-card"></i> Payment Method
+                </label>
+                <select name="paymentMethod" id="bwPayment">
+                  <option value="Pay at Check-in">Pay at Check-in</option>
+                  <option value="Online">Pay Online (Card via Stripe)</option>
+                </select>
+              </div>
+
+              <!-- Price breakdown -->
+              <div class="bw-summary" id="bwSummary"></div>
+
+              <!-- Submit button -->
+              <% if(currUser) { %>
+                <button type="submit" class="bw-book-btn">
+                  Reserve Now
+                </button>
+              <% } else { %>
+                <a href="/login" class="bw-book-btn bw-book-btn--login">
+                  Login to Book
+                </a>
+              <% } %>
+
+              <p class="bw-notice">You won't be charged yet</p>
             </form>
           </div>
+          <!-- ── END BOOKING WIDGET ── -->
 
-          <% } else { %>
-          <button class="button" id="bookingBtn">BOOKING</button>
-          <% } %>
-        </div>
+        <% } %>
       </div>
+      <!-- end booking-part -->
     </div>
+    <!-- end two-part -->
   </div>
-  <hr />
-  <div class="review-section">
-    <!-- Review Form -->
-    <% if(currUser) {%>
 
-    <h4 class="leave-review-text">Leav a Review</h4>
+  <hr />
+
+  <!-- ═══════════════════
+       REVIEW SECTION
+  ═══════════════════ -->
+  <div class="review-section">
+    <% if(currUser) {%>
+    <h4 class="leave-review-text">Leave a Review</h4>
     <form
       action="/listings/<%=listing.id%>/reviews"
       method="post"
@@ -218,49 +267,16 @@
     >
       <div class="mt-3">
         <fieldset class="starability-slot">
-          <input
-            type="radio"
-            id="no-rate"
-            class="input-no-rate"
-            name="review[rating]"
-            value="1"
-            checked
-            aria-label="No rating."
-          />
-          <input
-            type="radio"
-            id="first-rate1"
-            name="review[rating]"
-            value="1"
-          />
+          <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+          <input type="radio" id="first-rate1" name="review[rating]" value="1" />
           <label for="first-rate1" title="Terrible">1 star</label>
-          <input
-            type="radio"
-            id="first-rate2"
-            name="review[rating]"
-            value="2"
-          />
+          <input type="radio" id="first-rate2" name="review[rating]" value="2" />
           <label for="first-rate2" title="Not good">2 stars</label>
-          <input
-            type="radio"
-            id="first-rate3"
-            name="review[rating]"
-            value="3"
-          />
+          <input type="radio" id="first-rate3" name="review[rating]" value="3" />
           <label for="first-rate3" title="Average">3 stars</label>
-          <input
-            type="radio"
-            id="first-rate4"
-            name="review[rating]"
-            value="4"
-          />
+          <input type="radio" id="first-rate4" name="review[rating]" value="4" />
           <label for="first-rate4" title="Very good">4 stars</label>
-          <input
-            type="radio"
-            id="first-rate5"
-            name="review[rating]"
-            value="5"
-          />
+          <input type="radio" id="first-rate5" name="review[rating]" value="5" />
           <label for="first-rate5" title="Amazing">5 stars</label>
         </fieldset>
       </div>
@@ -281,7 +297,6 @@
     <hr />
     <% }%>
 
-    <!-- Review Loop -->
     <% if(listing.reviews.length !== 0){ %>
     <p class="add-reviews-text">
       <i class="fa-solid fa-star"></i>&nbsp;&nbsp;<%= listing.reviews.length %>
@@ -289,7 +304,6 @@
     </p>
     <div class="review-container">
       <% for(review of listing.reviews){ %>
-
       <div class="review-card">
         <div class="user-details">
           <div class="personal-info">
@@ -301,19 +315,12 @@
               <h5 class="email">@<%= review.author.email %></h5>
             </div>
           </div>
-
-          <p
-            class="starability-result ratings-stars"
-            data-rating="<%= review.rating %>"
-          >
-            Rated: 3 stars
+          <p class="starability-result ratings-stars" data-rating="<%= review.rating %>">
+            Rated: <%= review.rating %> stars
           </p>
         </div>
-
         <p class="comment"><%= review.comment %></p>
-
         <% if(currUser && currUser._id.equals(review.author._id)) {%>
-
         <form
           action="/listings/<%=listing.id%>/reviews/<%=review.id%>?_method=Delete"
           method="post"
@@ -329,76 +336,12 @@
     <% } %>
   </div>
 
-  <h2>Where you’ll be</h2>
-  <button id="toggleMap" class="toggle-btn">🌙 Dark Mode</button>
-
+  <h2>Where you'll be</h2>
   <div id="map"></div>
 </div>
 
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 
-<script>
-  //WishList Logic
 
-  const btn = document.querySelector(".wishlist-btn");
-  console.log(btn);
+<script src="/js/show.js"></script>
 
-  btn.addEventListener("click", () => {
-    const userId = btn.dataset.user;
-    const listingId = btn.dataset.listing;
 
-    if (!userId) {
-      alert("Login first");
-      return;
-    }
-
-    fetch(`/wishlist/${userId}/${listingId}`, {
-      method: "PATCH",
-    });
-
-    // Toggle heart UI (frontend only)
-    const icon = btn.querySelector("i");
-    icon.classList.toggle("fas");
-    icon.classList.toggle("far");
-  });
-
-  //Map Js
-
-  mapboxgl.accessToken = "<%= mapToken %>";
-
-  console.log(coordinates);
-
-  const lightStyle = "mapbox://styles/mapbox/streets-v12";
-  const darkStyle = "mapbox://styles/mapbox/dark-v11";
-
-  let isDark = false;
-
-  const map = new mapboxgl.Map({
-    container: "map",
-    style: lightStyle,
-    center: coordinates || [77.209, 28.6139],
-    zoom: 13,
-  });
-
-  map.addControl(new mapboxgl.NavigationControl());
-
-  const marker = new mapboxgl.Marker({ color: "red" })
-    .setLngLat(coordinates)
-    .addTo(map);
-
-  // Nearby listings (HOUSE ICON)
-
-  // Dark + Light Mode
-
-  document.getElementById("toggleMap").addEventListener("click", () => {
-    isDark = !isDark;
-
-    map.setStyle(isDark ? darkStyle : lightStyle);
-
-    const btn = document.getElementById("toggleMap");
-    btn.innerText = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-    btn.style.background = isDark ? "#eee" : "#111";
-    btn.style.color = isDark ? "#000" : "#fff";
-  });
-</script>
-<script src="/js/slider.js"></script>

@@ -20,7 +20,7 @@ router
       failureRedirect: "/login",
       failureFlash: true,
     }),
-    wrapAsync(userController.login)
+    wrapAsync(userController.login),
   );
 
 router.get("/logout", userController.logout);

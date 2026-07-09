@@ -29,8 +29,8 @@ passport.use(
         let facebookUser = await newUser.save();
         return cb(null, facebookUser);
       }
-    }
-  )
+    },
+  ),
 );
 
 module.exports = passport;

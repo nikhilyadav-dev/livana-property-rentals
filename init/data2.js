@@ -32,6 +32,10 @@ const sampleListings = [
     bathrooms: 4,
     garages: 1,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [73.7639, 15.5439],
+    },
   },
 
   {
@@ -67,6 +71,10 @@ const sampleListings = [
     bathrooms: 3,
     garages: 1,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [76.7067, 8.7379],
+    },
   },
 
   {
@@ -102,6 +110,10 @@ const sampleListings = [
     bathrooms: 3,
     garages: 1,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [75.7873, 26.9124],
+    },
   },
 
   {
@@ -137,6 +149,10 @@ const sampleListings = [
     bathrooms: 4,
     garages: 2,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [78.3489, 17.4401],
+    },
   },
   {
     title: "Premium Countryside Farmhouse in Nashik",
@@ -171,6 +187,10 @@ const sampleListings = [
     bathrooms: 4,
     garages: 2,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [73.7898, 19.9975],
+    },
   },
 
   {
@@ -206,6 +226,10 @@ const sampleListings = [
     bathrooms: 3,
     garages: 2,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [75.7382, 12.4244],
+    },
   },
 
   {
@@ -241,6 +265,10 @@ const sampleListings = [
     bathrooms: 4,
     garages: 1,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [92.9956, 11.9695],
+    },
   },
 
   {
@@ -276,6 +304,10 @@ const sampleListings = [
     bathrooms: 4,
     garages: 2,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [72.1852, 10.8505],
+    },
   },
 
   {
@@ -311,6 +343,10 @@ const sampleListings = [
     bathrooms: 4,
     garages: 1,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [92.9956, 11.9695],
+    },
   },
 
   {
@@ -346,6 +382,10 @@ const sampleListings = [
     bathrooms: 3,
     garages: 1,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [72.1852, 10.8505],
+    },
   },
 
   {
@@ -381,6 +421,10 @@ const sampleListings = [
     bathrooms: 4,
     garages: 2,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [73.6833, 24.5854],
+    },
   },
 
   {
@@ -416,6 +460,10 @@ const sampleListings = [
     bathrooms: 4,
     garages: 2,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [77.0595, 10.0889],
+    },
   },
   {
     title: "Royal Heritage Castle in Jaipur",
@@ -450,6 +498,10 @@ const sampleListings = [
     bathrooms: 5,
     garages: 2,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [75.7873, 26.9124],
+    },
   },
   {
     title: "Royal Heritage Castle in Jaipur",
@@ -484,6 +536,10 @@ const sampleListings = [
     bathrooms: 5,
     garages: 2,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [75.7873, 26.9124],
+    },
   },
 
   {
@@ -519,6 +575,10 @@ const sampleListings = [
     bathrooms: 3,
     garages: 1,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [77.1887, 32.2396],
+    },
   },
 
   {
@@ -554,6 +614,10 @@ const sampleListings = [
     bathrooms: 4,
     garages: 1,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [77.577, 34.1526],
+    },
   },
   {
     title: "Luxury Mountain Villa in Mussoorie",
@@ -588,6 +652,10 @@ const sampleListings = [
     bathrooms: 3,
     garages: 1,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [78.0747, 30.4598],
+    },
   },
 
   {
@@ -623,6 +691,10 @@ const sampleListings = [
     bathrooms: 3,
     garages: 1,
     aminities: ["Pool", "Parking", "Wifi", "Gym", "Garden"],
+    geometry: {
+      type: "Point",
+      coordinates: [76.3234, 32.219],
+    },
   },
 ];
 

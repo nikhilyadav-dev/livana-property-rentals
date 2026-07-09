@@ -4,13 +4,14 @@ if (process.env.NODE_ENV != "production") {
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const MONGO_URL = "mongodb://127.0.0.1:27017/rentals";
+const MONGO_URL = process.env.ATLAS_DB;
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const cors = require("cors");
 const session = require("express-session");
+const MongoStore = require("connect-mongo").default;
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStretgy = require("passport-local");
@@ -21,6 +22,9 @@ const reviewsRouter = require("./routes/review");
 const usersRouter = require("./routes/user");
 const googleRouter = require("./routes/googleAuth");
 const facebookRouter = require("./routes/facebookAuth");
+
+const bookingRouter = require("./routes/booking");
+const bookingController = require("./controllers/booking");
 
 // set view engine
 app.set("view engine", "ejs");
@@ -33,8 +37,21 @@ app.use(express.urlencoded({ extended: true }));
 // Parse application/json (from Postman, fetch API, etc.)
 app.use(express.json());
 app.use(cors());
+const store = MongoStore.create({
+  mongoUrl: MONGO_URL,
+  crypto: {
+    secret: process.env.Secret,
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error", () => {
+  console.log("ERROR on mongo session store");
+});
+
 const sessionOption = {
-  secret: " mysuperscretesode",
+  store,
+  secret: process.env.Secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -72,11 +89,18 @@ async function main() {
   await mongoose.connect(MONGO_URL);
 }
 
+app.post(
+  "/bookings/webhook",
+  express.raw({ type: "application/json" }),
+  bookingController.stripeWebhook,
+);
+
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", usersRouter);
 app.use("/auth/google", googleRouter);
 app.use("/auth/facebook", facebookRouter);
+app.use("/bookings", bookingRouter);
 
 //Page not found middleware
 app.use((req, res, next) => {

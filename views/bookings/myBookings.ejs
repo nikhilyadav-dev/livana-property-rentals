@@ -1,0 +1,123 @@
+<% layout('layouts/boilerPlate') %>
+
+<link rel="stylesheet" href="/css/bookings.css" />
+
+<div class="bookings-page">
+  <div class="bookings-container">
+    <h1 class="bookings-title">My Bookings</h1>
+
+    <!-- <%- include('../includes/flash') %> -->
+
+    <% if (bookings.length === 0) { %>
+      <!-- Empty State -->
+      <div class="bookings-empty">
+        <div class="bookings-empty__icon">🏠</div>
+        <h3>No bookings yet</h3>
+        <p>Explore properties and make your first booking.</p>
+        <a href="/listings" class="bookings-empty__btn">Browse Listings</a>
+      </div>
+
+    <% } else { %>
+      <div class="bookings-list">
+        <% bookings.forEach(booking => { %>
+          <div class="booking-card booking-card--<%= booking.status %>">
+
+            <!-- Property Image -->
+            <div class="booking-card__image">
+            <% if (booking.listing && booking.listing.image && booking.listing.image.length > 0) { %>
+  <img
+    src="<%= booking.listing.image[0].url %>"
+    alt="<%= booking.listing.title %>"
+  />
+              <% } else { %>
+                <img src="/asset/9515711c2027...jpg" alt="property" />
+              <% } %>
+              <span class="booking-card__status booking-card__status--<%= booking.status %>">
+                <%= booking.status.charAt(0).toUpperCase() + booking.status.slice(1) %>
+              </span>
+            </div>
+
+            <!-- Booking Details -->
+            <div class="booking-card__body">
+              <div class="booking-card__top">
+                <div>
+                  <h3 class="booking-card__title">
+                    <%= booking.listing ? booking.listing.title : "Property Unavailable" %>
+                  </h3>
+                  <p class="booking-card__location">
+                    📍 <%= booking.listing ? `${booking.listing.location}, ${booking.listing.country}` : "" %>
+                  </p>
+                </div>
+              </div>
+
+              <div class="booking-card__meta">
+                <div class="meta-item">
+                  <span class="meta-label">Check-In</span>
+                  <span class="meta-value">
+                    <%= new Date(booking.checkInDate).toDateString() %>
+                  </span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Check-Out</span>
+                  <span class="meta-value">
+                    <%= new Date(booking.checkOutDate).toDateString() %>
+                  </span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Guests</span>
+                  <span class="meta-value"><%= booking.guests %></span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Method</span>
+                  <span class="meta-value"><%= booking.paymentMethod %></span>
+                </div>
+              </div>
+
+              <div class="booking-card__footer">
+                <div class="booking-card__price">
+                  <span class="price-amount">₹<%= booking.totalPrice.toLocaleString() %></span>
+                  <span
+                    class="payment-badge payment-badge--<%= booking.isPaid ? 'paid' : 'unpaid' %>"
+                  >
+                    <%= booking.isPaid ? "✓ Paid" : "⏳ Unpaid" %>
+                  </span>
+                </div>
+
+                <div class="booking-card__actions">
+                  <!-- Pay with Stripe -->
+                  <% if (!booking.isPaid && booking.status !== "cancelled") { %>
+                    <form action="/bookings/stripe" method="POST">
+                      <input type="hidden" name="bookingId" value="<%= booking._id %>" />
+                      <button type="submit" class="action-btn action-btn--pay">
+                        💳 Pay ₹<%= booking.totalPrice.toLocaleString() %>
+                      </button>
+                    </form>
+                  <% } %>
+
+                  <!-- Cancel -->
+                  <% if (booking.status !== "cancelled" && !booking.isPaid) { %>
+                    <form
+                      action="/bookings/cancel"
+                      method="POST"
+                      onsubmit="return confirm('Cancel this booking?')"
+                    >
+                      <input type="hidden" name="bookingId" value="<%= booking._id %>" />
+                      <button type="submit" class="action-btn action-btn--cancel">
+                        Cancel
+                      </button>
+                    </form>
+                  <% } %>
+                </div>
+              </div>
+
+              <!-- Booking ID -->
+              <p class="booking-card__id">
+                Booking ID: <code><%= booking._id %></code>
+              </p>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</div>

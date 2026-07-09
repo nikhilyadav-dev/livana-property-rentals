@@ -25,11 +25,11 @@ passport.use(
             (Math.floor(Math.random() * (1000 - 500 + 1)) + 500),
         });
         let googleUser = await newUser.save();
-        console.log(googleUser);
+
         return cb(null, googleUser);
       }
-    }
-  )
+    },
+  ),
 );
 
 module.exports = passport;
